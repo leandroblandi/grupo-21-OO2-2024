@@ -35,6 +35,15 @@ public class Usuario {
 	private String clave;
 
 	@Column(nullable = false)
+	private String nombre;
+
+	@Column(nullable = false)
+	private String apellido;
+
+	@Column(nullable = false, unique = true)
+	private int dni;
+
+	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Rol rol;
 
