@@ -33,12 +33,12 @@ public class Venta {
 	@Column(nullable = false)
 	private LocalDate fechaVenta;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private List<LoteArticulo> loteArticulos;
 
 	@Column(nullable = false)
 	private double precioFinal;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-	private List<Cliente> clientes;
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	private Cliente cliente;
 }
