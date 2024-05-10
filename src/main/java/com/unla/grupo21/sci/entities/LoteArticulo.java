@@ -1,5 +1,7 @@
 package com.unla.grupo21.sci.entities;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -39,5 +41,8 @@ public class LoteArticulo {
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private Proveedor proveedor;
+
+	@Column(nullable = false)
+	private LocalDateTime fechaRecepcion;
 
 }
