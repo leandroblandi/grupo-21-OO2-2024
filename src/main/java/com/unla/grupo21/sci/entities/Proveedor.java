@@ -1,5 +1,7 @@
 package com.unla.grupo21.sci.entities;
 
+import org.hibernate.validator.constraints.Length;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,8 +25,10 @@ public class Proveedor {
 	private long idProveedor;
 
 	@Column(nullable = false)
+	@Length(min = 4, max = 64)
 	private String razonSocial;
 
 	@Column(nullable = false, unique = true)
+	@Length(min = 1, max = 32)
 	private String cuit;
 }

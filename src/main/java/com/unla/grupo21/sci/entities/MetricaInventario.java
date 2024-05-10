@@ -3,6 +3,8 @@ package com.unla.grupo21.sci.entities;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,6 +32,7 @@ public class MetricaInventario {
 	private long idMetrica;
 
 	@Column(nullable = false)
+	@DateTimeFormat(pattern = "dd/MM/yyyy hh:mm:ss")
 	private LocalDateTime fecha;
 
 	@Column(nullable = false)
