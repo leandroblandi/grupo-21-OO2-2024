@@ -1,5 +1,7 @@
 package com.unla.grupo21.sci.entities;
 
+import org.hibernate.validator.constraints.Length;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,12 +20,12 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "articulos")
 public class Articulo {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idArticulo;
 
 	@Column(nullable = false)
+	@Length(min = 4, max = 128)
 	private String descripcion;
 
 	@Column(nullable = false)
@@ -31,5 +33,4 @@ public class Articulo {
 
 	@Column(nullable = false)
 	private double precioVenta;
-
 }

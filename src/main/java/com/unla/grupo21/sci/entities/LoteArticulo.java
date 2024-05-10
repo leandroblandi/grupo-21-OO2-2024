@@ -2,6 +2,8 @@ package com.unla.grupo21.sci.entities;
 
 import java.time.LocalDateTime;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,6 +34,7 @@ public class LoteArticulo {
 	private Articulo articulo;
 
 	@Column(nullable = false)
+	@Min(0)
 	private int cantidad;
 
 	@Column(nullable = false)
@@ -40,6 +44,7 @@ public class LoteArticulo {
 	private Proveedor proveedor;
 
 	@Column(nullable = false)
+	@DateTimeFormat(pattern = "dd/MM/yyyy hh:mm:ss")
 	private LocalDateTime fechaRecepcion;
 
 }

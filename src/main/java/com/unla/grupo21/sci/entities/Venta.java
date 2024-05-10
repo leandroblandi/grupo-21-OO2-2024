@@ -3,6 +3,8 @@ package com.unla.grupo21.sci.entities;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,6 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,6 +34,7 @@ public class Venta {
 	private long idVenta;
 
 	@Column(nullable = false)
+	@DateTimeFormat(pattern = "dd/MM/yyyy hh:mm:ss")
 	private LocalDate fechaVenta;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)

@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,6 +30,6 @@ public class MetricaArtMasVendido {
 	private Articulo articulo;
 
 	@Column(nullable = false)
+	@Min(0)
 	private int cantidadVentas;
-
 }
