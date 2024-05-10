@@ -16,15 +16,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "proveedores")
-public class Proveedor {
+@Table(name = "articulos")
+public class Articulo {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idProveedor;
+	private long idArticulo;
 	
 	@Column(nullable = false)
-	private String razonSocial;
+	private String descripcion;
 	
-	@Column(nullable = false, unique = true)
-	private String cuit;
+	@Column(nullable = false)
+	private double costo;
+	
+	@Column(nullable = false)
+	private double precioVenta;
+	
+	
 }
