@@ -18,9 +18,9 @@ import org.springframework.security.web.SecurityFilterChain;
 import com.unla.grupo21.sci.services.impl.UserService;
 
 /***
- * Clase de configuracion para la seguridad de la aplicacion. 
- * Indica que rutas están permitidas, y cuáles requieren autenticación.
- * También indica el método de autenticación mediante el `UserService` 
+ * Clase de configuracion para la seguridad de la aplicacion. Indica que rutas
+ * están permitidas, y cuáles requieren autenticación. También indica el método
+ * de autenticación mediante el `UserService`
  */
 @Configuration
 @EnableWebSecurity

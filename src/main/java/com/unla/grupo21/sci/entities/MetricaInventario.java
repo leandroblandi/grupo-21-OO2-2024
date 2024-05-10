@@ -24,21 +24,20 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "metrica_inventarios")
 public class MetricaInventario {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idMetrica;
-	
+
 	@Column(nullable = false)
 	private LocalDateTime fecha;
-	
+
 	@Column(nullable = false)
 	private double rotacionInventario;
-	
+
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private List<MetricaArtMasVendido> metricaArticulosMasVendidos;
-	
+
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private List<MetricaArtTiempoAlmacenado> metricaTiempoArticulos;
-		
 }

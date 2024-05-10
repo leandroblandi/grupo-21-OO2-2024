@@ -6,8 +6,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 /**
- * Este service implementa una interfaz de Spring para poder autenticar.
- * Debe utilizar un repository para buscar los usuarios que estén registrados
+ * Este service implementa una interfaz de Spring para poder autenticar. Debe
+ * utilizar un repository para buscar los usuarios que estén registrados
  */
 @Service
 public class UserService implements UserDetailsService {
