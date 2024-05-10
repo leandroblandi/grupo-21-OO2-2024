@@ -37,9 +37,7 @@ public class LoteArticulo {
 	@Column(nullable = false)
 	private double precioCompra;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-	@JoinTable(name = "lotes_proveedores", joinColumns = { @JoinColumn(name = "id_lote") }, inverseJoinColumns = {
-			@JoinColumn(name = "id_proveedor") })
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private Proveedor proveedor;
 
 }
