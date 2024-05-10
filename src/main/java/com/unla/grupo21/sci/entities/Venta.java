@@ -40,5 +40,5 @@ public class Venta {
 	private double precioFinal;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-	private Usuario usurio;
+	private Usuario usuario;
 }
