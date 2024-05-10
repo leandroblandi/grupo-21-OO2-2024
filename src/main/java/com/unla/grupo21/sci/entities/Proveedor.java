@@ -21,10 +21,10 @@ public class Proveedor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idProveedor;
-	
+
 	@Column(nullable = false)
 	private String razonSocial;
-	
+
 	@Column(nullable = false, unique = true)
 	private String cuit;
 }

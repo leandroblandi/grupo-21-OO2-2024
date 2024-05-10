@@ -22,15 +22,14 @@ public class Articulo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idArticulo;
-	
+
 	@Column(nullable = false)
 	private String descripcion;
-	
+
 	@Column(nullable = false)
 	private double costo;
-	
+
 	@Column(nullable = false)
 	private double precioVenta;
-	
-	
+
 }

@@ -26,10 +26,10 @@ public class MetricaArtTiempoAlmacenado {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idMetricaTiempo;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private Articulo articulo;
-	
+
 	@Column(nullable = false)
 	private Duration tiempoAlmacenado;
 }

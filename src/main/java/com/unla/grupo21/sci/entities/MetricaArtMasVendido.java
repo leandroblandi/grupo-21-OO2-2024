@@ -24,10 +24,10 @@ public class MetricaArtMasVendido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idMetricaVendido;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private Articulo articulo;
-	
+
 	@Column(nullable = false)
 	private int cantidadVentas;
 
