@@ -5,7 +5,6 @@ import org.hibernate.validator.constraints.Length;
 import com.unla.grupo21.sci.enums.Rol;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -13,10 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,7 +29,7 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idUsuario;
 
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	@Length(min = 4, max = 64)
 	private String usuario;
 
@@ -56,5 +52,7 @@ public class Usuario {
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Rol rol;
-
+	
+	@Column(nullable = false)
+	private boolean activo;
 }
