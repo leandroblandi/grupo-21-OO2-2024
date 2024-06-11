@@ -15,7 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import com.unla.grupo21.sci.services.impl.UserService;
+import com.unla.grupo21.sci.services.impl.UsuarioService;
 
 /***
  * Clase de configuracion para la seguridad de la aplicacion. Indica que rutas
@@ -27,7 +27,7 @@ import com.unla.grupo21.sci.services.impl.UserService;
 @EnableMethodSecurity
 public class SecurityConfiguration {
 	@Autowired
-	private UserService userService;
+	private UsuarioService userService;
 
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

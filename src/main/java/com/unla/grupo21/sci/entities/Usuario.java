@@ -63,4 +63,8 @@ public class Usuario {
 
 	@UpdateTimestamp
 	private LocalDateTime fechaActualizacion;
+	
+	public String getApellido() {
+		return apellido;
+	}
 }
