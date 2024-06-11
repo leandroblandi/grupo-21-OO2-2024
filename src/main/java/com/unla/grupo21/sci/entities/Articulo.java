@@ -1,5 +1,9 @@
 package com.unla.grupo21.sci.entities;
 
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.Length;
 
 import jakarta.persistence.Column;
@@ -33,4 +37,10 @@ public class Articulo {
 
 	@Column(nullable = false)
 	private double precioVenta;
+	
+	@CreationTimestamp
+	private LocalDateTime fechaCreacion;
+
+	@UpdateTimestamp
+	private LocalDateTime fechaActualizacion;
 }

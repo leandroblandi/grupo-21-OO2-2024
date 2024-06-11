@@ -1,5 +1,9 @@
 package com.unla.grupo21.sci.entities;
 
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.Length;
 
 import jakarta.persistence.CascadeType;
@@ -53,4 +57,10 @@ public class Usuario {
 	
 	@Column(nullable = false)
 	private boolean activo;
+	
+	@CreationTimestamp
+	private LocalDateTime fechaCreacion;
+
+	@UpdateTimestamp
+	private LocalDateTime fechaActualizacion;
 }

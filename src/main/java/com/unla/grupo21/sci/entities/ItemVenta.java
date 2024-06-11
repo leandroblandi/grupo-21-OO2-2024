@@ -25,32 +25,25 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "lote_articulos")
-public class LoteArticulo {
+@Table(name = "items_venta")
+public class ItemVenta {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idLote;
-
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	private long idItem;
+	
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST })
 	private Articulo articulo;
-
+	
 	@Column(nullable = false)
-	@Min(0)
+	@Min(1)
 	private int cantidad;
-
+	
 	@Column(nullable = false)
-	private double precioCompra;
-
-	@Column(nullable = true)
-	private String proveedor;
-
-	@Column(nullable = false)
-	private LocalDateTime fechaRecepcion;
+	private double subtotal;
 	
 	@CreationTimestamp
 	private LocalDateTime fechaCreacion;
 
 	@UpdateTimestamp
 	private LocalDateTime fechaActualizacion;
-
 }

@@ -1,9 +1,11 @@
 package com.unla.grupo21.sci.entities;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -27,21 +29,25 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "ventas")
 public class Venta {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idVenta;
 
 	@Column(nullable = false)
-	@DateTimeFormat(pattern = "dd/MM/yyyy hh:mm:ss")
 	private LocalDate fechaVenta;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-	private List<LoteArticulo> loteArticulos;
+	private List<ItemVenta> items;
 
 	@Column(nullable = false)
 	private double precioFinal;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private Usuario usuario;
+	
+	@CreationTimestamp
+	private LocalDateTime fechaCreacion;
+
+	@UpdateTimestamp
+	private LocalDateTime fechaActualizacion;
 }
