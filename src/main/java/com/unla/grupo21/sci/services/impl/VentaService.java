@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.unla.grupo21.sci.entities.ItemVenta;
+import com.unla.grupo21.sci.entities.Usuario;
 import com.unla.grupo21.sci.entities.Venta;
 import com.unla.grupo21.sci.repositories.IVentaRepository;
 import com.unla.grupo21.sci.services.IVentaService;
@@ -30,6 +32,12 @@ public class VentaService implements IVentaService{
 		}
 		
 		return ventaOptional.get();
+	}
+
+	@Override
+	public Venta generarVenta(Usuario usuario, List<ItemVenta> items) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

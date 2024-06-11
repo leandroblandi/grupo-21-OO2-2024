@@ -7,11 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.unla.grupo21.sci.entities.Articulo;
-import com.unla.grupo21.sci.entities.Usuario;
 import com.unla.grupo21.sci.repositories.IArticuloRepository;
 import com.unla.grupo21.sci.services.IArticuloService;
-
-import jakarta.transaction.Transactional;
 
 @Service
 public class ArticuloService implements IArticuloService {
@@ -45,11 +42,5 @@ public class ArticuloService implements IArticuloService {
 		}
 
 		return articuloRepository.save(articulo);
-	}
-
-	@Override
-	@Transactional
-	public void generarCompra(Usuario usuario, Articulo articulo, int cantidad) {
-		// TODO Auto-generated method stub
 	}
 }
