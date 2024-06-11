@@ -16,13 +16,14 @@ import org.springframework.stereotype.Service;
 import com.unla.grupo21.sci.entities.Usuario;
 import com.unla.grupo21.sci.entities.UsuarioRol;
 import com.unla.grupo21.sci.repositories.IUsuarioRepository;
+import com.unla.grupo21.sci.services.IUsuarioService;
 
 /**
  * Este service implementa una interfaz de Spring para poder autenticar. Debe
  * utilizar un repository para buscar los usuarios que estén registrados
  */
 @Service
-public class UsuarioService implements UserDetailsService {
+public class UsuarioService implements UserDetailsService, IUsuarioService {
 	
 	@Autowired
 	private IUsuarioRepository usuarioRepository;
@@ -43,4 +44,23 @@ public class UsuarioService implements UserDetailsService {
 	private List<GrantedAuthority> buildGrantedAuthorities(UsuarioRol rol) {
 		return Arrays.asList(new SimpleGrantedAuthority(rol.getRol()));
 	}
+
+	@Override
+	public List<Usuario> traerUsuarios() {
+
+		return usuarioRepository.findAll();
+	}
+
+	@Override
+	public Usuario traerUsuario(long idUsuario) {
+
+		Optional<Usuario> usuarioOptional = usuarioRepository.findById(idUsuario);
+		
+		if(usuarioOptional.isEmpty()) {
+			throw new RuntimeException("El usuario con ID " + idUsuario + " no existe en la base de datos.");
+		}
+		return usuarioOptional.get();
+	}
+	
+	
 }
