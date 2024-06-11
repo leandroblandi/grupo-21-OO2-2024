@@ -1,6 +1,7 @@
 package com.unla.grupo21.sci.services.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,12 @@ public class LoteArticuloService implements ILoteArticuloService {
 
 	@Override
 	public LoteArticulo traerLote(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<LoteArticulo> loteOptional = loteArticuloRepository.findById(id);
+		
+		if(loteOptional.isEmpty()) {
+			throw new RuntimeException("El lote con ID " + id + " no existe en la base de datos.");
+		}
+		return loteOptional.get();
 	}
 
 	@Override
