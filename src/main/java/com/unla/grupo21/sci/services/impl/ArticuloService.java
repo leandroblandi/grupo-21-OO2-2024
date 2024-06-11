@@ -16,27 +16,32 @@ public class ArticuloService implements IArticuloService {
 
 	@Autowired
 	private IArticuloRepository articuloRepository;
-	
+
 	@Override
 	public List<Articulo> traerArticulos() {
-		// TODO Auto-generated method stub
-		return null;
+		return articuloRepository.findAll();
 	}
 
 	@Override
 	public Articulo traerArticulo(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Optional<Articulo> articuloOptional = articuloRepository.findById(id);
+		
+		if(articuloOptional.isEmpty()) {
+			throw new RuntimeException("El articulo con ID " + id + " no existe en la base de datos.");
+		}
+		
+		return articuloOptional.get();
 	}
-	
+
 	@Override
 	public Articulo crearArticulo(Articulo articulo) {
 		Optional<Articulo> articuloOptional = articuloRepository.findById(articulo.getIdArticulo());
-		
-		if(articuloOptional.isPresent()) {
+
+		if (articuloOptional.isPresent()) {
 			throw new RuntimeException("El articulo ya existe en la base de datos");
 		}
-		
+
 		return articuloRepository.save(articulo);
 	}
 
