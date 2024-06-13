@@ -49,7 +49,7 @@ public class ArticuloService implements IArticuloService {
 	@Transactional
 	@Override
 	public Articulo modificarArticulo(Articulo articulo) {
-		Articulo articuloDB = traerArticulo(articulo.getIdArticulo());
+		traerArticulo(articulo.getIdArticulo());
 		return articuloRepository.save(articulo);	
 	}
 	

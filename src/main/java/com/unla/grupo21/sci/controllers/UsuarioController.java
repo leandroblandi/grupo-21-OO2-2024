@@ -1,30 +1,14 @@
 package com.unla.grupo21.sci.controllers;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.unla.grupo21.sci.helpers.ViewRouteHelper;
+import com.unla.grupo21.sci.services.IUsuarioService;
 
-@Controller
+@RestController
+@RequestMapping("/api")
 public class UsuarioController {
-
-	@GetMapping("/login")
-	public String login(Model model, @RequestParam(name = "error", required = false) String error,
-			@RequestParam(name = "logout", required = false) String logout) {
-		model.addAttribute("error", error);
-		model.addAttribute("logout", logout);
-		return ViewRouteHelper.USER_LOGIN;
-	}
-
-	@GetMapping("/logout")
-	public String logout(Model model) {
-		return ViewRouteHelper.USER_LOGOUT;
-	}
-
-	@GetMapping("/loginsuccess")
-	public String loginCheck() {
-		return "redirect:/user";
-	}
+	@Autowired
+	private IUsuarioService usuarioService;
 }

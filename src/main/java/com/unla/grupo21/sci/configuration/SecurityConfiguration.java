@@ -33,20 +33,7 @@ public class SecurityConfiguration {
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http.csrf(AbstractHttpConfigurer::disable).cors(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(auth -> {
-					auth.requestMatchers("/css/*", "/imgs/*", "/js/*", "/vendor/bootstrap/css/*", "/vendor/jquery/*",
-							"/vendor/bootstrap/js/*", "/api/v1/**").permitAll();
-					auth.anyRequest().authenticated();
-				}).formLogin(login -> {
-					login.loginPage("/login");
-					login.loginProcessingUrl("/loginprocess");
-					login.usernameParameter("username");
-					login.passwordParameter("password");
-					login.defaultSuccessUrl("/loginsuccess");
-					login.permitAll();
-				}).logout(logout -> {
-					logout.logoutUrl("/logout");
-					logout.logoutSuccessUrl("/login");
-					logout.permitAll();
+					auth.anyRequest().permitAll();
 				}).build();
 	}
 
