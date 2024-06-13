@@ -43,4 +43,11 @@ public class ArticuloService implements IArticuloService {
 
 		return articuloRepository.save(articulo);
 	}
+	
+	@Override
+	public Articulo modificarArticulo(Articulo articulo) {
+		Articulo articuloDB = traerArticulo(articulo.getIdArticulo());
+		return articuloRepository.save(articulo);	
+	}
+	
 }

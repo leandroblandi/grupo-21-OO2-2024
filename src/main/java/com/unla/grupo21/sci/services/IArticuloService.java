@@ -10,4 +10,6 @@ public interface IArticuloService {
 	public Articulo traerArticulo(long id);
 	
 	public Articulo crearArticulo(Articulo articulo);
+	
+	public Articulo modificarArticulo(Articulo articulo);
 }
