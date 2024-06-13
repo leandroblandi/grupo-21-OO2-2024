@@ -40,9 +40,16 @@ public class ArticuloController {
 	@PostMapping("/articulos")
 	public ResponseEntity<Articulo> crearArticulo(@Valid @RequestBody ArticuloDto articuloDto) {
 		Articulo articulo = Articulo.builder().descripcion(articuloDto.getDescripcion()).costo(articuloDto.getCosto())
-				.precioVenta(articuloDto.getPrecioVenta()).build();
+				.precioVenta(articuloDto.getPrecioVenta()).activo(true).build();
 
 		return ResponseEntity.ok(service.crearArticulo(articulo));
+	}
+
+	public ResponseEntity<Articulo> borrarArticulo(@PathVariable Long id) {
+
+		Articulo articulo = service.traerArticulo(id);
+
+		return ResponseEntity.ok(service.borrarArticulo(articulo));
 	}
 
 	@PutMapping("/articulos/{id}")

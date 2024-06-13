@@ -53,4 +53,10 @@ public class ArticuloService implements IArticuloService {
 		return articuloRepository.save(articulo);	
 	}
 	
+	@Override
+	public Articulo borrarArticulo(Articulo articulo) {
+		articulo.setActivo(false);
+		return modificarArticulo(articulo);
+	}
+	
 }

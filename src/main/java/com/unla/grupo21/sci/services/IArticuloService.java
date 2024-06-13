@@ -12,4 +12,6 @@ public interface IArticuloService {
 	public Articulo crearArticulo(Articulo articulo);
 	
 	public Articulo modificarArticulo(Articulo articulo);
+	
+	public Articulo borrarArticulo(Articulo articulo);
 }

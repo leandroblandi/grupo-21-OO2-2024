@@ -37,10 +37,13 @@ public class Articulo {
 
 	@Column(nullable = false)
 	private double precioVenta;
-	
+
 	@CreationTimestamp
 	private LocalDateTime fechaCreacion;
 
 	@UpdateTimestamp
 	private LocalDateTime fechaActualizacion;
+
+	@Column(nullable = false)
+	private boolean activo;
 }
