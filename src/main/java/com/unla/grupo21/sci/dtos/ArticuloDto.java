@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class CrearArticuloDto {
+public class ArticuloDto {
 
 	@Length(min = 4, max = 128)
 	private String descripcion;
