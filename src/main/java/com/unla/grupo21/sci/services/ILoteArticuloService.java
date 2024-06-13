@@ -11,5 +11,5 @@ public interface ILoteArticuloService {
 
 	public LoteArticulo traerLote(long id);
 
-	public LoteArticulo generarAltaLote(Articulo articulo, int cantidad, String proveedor, double precio);
+	public LoteArticulo generarAltaLote(Articulo articulo, int cantidad, String proveedor);
 }
