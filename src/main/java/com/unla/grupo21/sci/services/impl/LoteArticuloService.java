@@ -39,9 +39,9 @@ public class LoteArticuloService implements ILoteArticuloService {
 
 	@Override
 	@Transactional
-	public LoteArticulo generarAltaLote(Articulo articulo, int cantidad, String proveedor) {
-		Articulo articuloDB = articuloService.traerArticulo(articulo.getIdArticulo());
-		double precioFinal = articulo.getCosto() * (double) cantidad;
+	public LoteArticulo generarAltaLote(long idArticulo, int cantidad, String proveedor, double costo) {
+		Articulo articuloDB = articuloService.traerArticulo(idArticulo);
+		double precioFinal = costo * cantidad;
 		LoteArticulo loteArticulo = LoteArticulo.builder().articulo(articuloDB).cantidad(cantidad)
 				.precioCompra(precioFinal).proveedor(proveedor).fechaRecepcion(LocalDateTime.now()).build();
 		return loteArticuloRepository.save(loteArticulo);
