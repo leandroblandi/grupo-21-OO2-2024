@@ -10,6 +10,8 @@ import com.unla.grupo21.sci.entities.Articulo;
 import com.unla.grupo21.sci.repositories.IArticuloRepository;
 import com.unla.grupo21.sci.services.IArticuloService;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class ArticuloService implements IArticuloService {
 
@@ -44,6 +46,7 @@ public class ArticuloService implements IArticuloService {
 		return articuloRepository.save(articulo);
 	}
 	
+	@Transactional
 	@Override
 	public Articulo modificarArticulo(Articulo articulo) {
 		Articulo articuloDB = traerArticulo(articulo.getIdArticulo());
