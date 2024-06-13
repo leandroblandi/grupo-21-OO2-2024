@@ -52,7 +52,7 @@ public class Usuario {
 	@Min(0)
 	private int dni;
 
-	@OneToOne(fetch=FetchType.LAZY, cascade = { CascadeType.PERSIST })
+	@OneToOne(fetch=FetchType.EAGER, cascade = { CascadeType.PERSIST })
 	private UsuarioRol rol;
 	
 	@Column(nullable = false)

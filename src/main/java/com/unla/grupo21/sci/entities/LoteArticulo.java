@@ -31,7 +31,7 @@ public class LoteArticulo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idLote;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private Articulo articulo;
 
 	@Column(nullable = false)

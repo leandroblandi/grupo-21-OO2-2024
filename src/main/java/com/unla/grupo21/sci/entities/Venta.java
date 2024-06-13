@@ -36,13 +36,13 @@ public class Venta {
 	@Column(nullable = false)
 	private LocalDate fechaVenta;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private List<ItemVenta> items;
 
 	@Column(nullable = false)
 	private double precioFinal;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private Usuario usuario;
 	
 	@CreationTimestamp

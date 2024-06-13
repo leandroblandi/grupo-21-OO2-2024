@@ -47,13 +47,11 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
 
 	@Override
 	public List<Usuario> traerUsuarios() {
-
 		return usuarioRepository.findAll();
 	}
 
 	@Override
 	public Usuario traerUsuario(long idUsuario) {
-
 		Optional<Usuario> usuarioOptional = usuarioRepository.findById(idUsuario);
 		
 		if(usuarioOptional.isEmpty()) {

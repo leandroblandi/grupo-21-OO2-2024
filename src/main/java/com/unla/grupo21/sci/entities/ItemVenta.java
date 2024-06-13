@@ -31,7 +31,7 @@ public class ItemVenta {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idItem;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST })
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST })
 	private Articulo articulo;
 	
 	@Column(nullable = false)
