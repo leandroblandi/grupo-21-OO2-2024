@@ -4,6 +4,10 @@ import javax.crypto.SecretKey;
 
 import io.jsonwebtoken.Jwts;
 
+/**
+ * Esta clase contiene algunos atributos utiles para la configuracion de
+ * seguridad, relacionado a la generacion del Token JWT
+ */
 public class TokenJwtConfiguration {
 	public static final SecretKey SECRET_KEY = Jwts.SIG.HS256.key().build();
 	public static final String PREFIX_TOKEN = "Bearer ";

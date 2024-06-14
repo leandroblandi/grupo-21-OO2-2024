@@ -2,6 +2,7 @@ package com.unla.grupo21.sci.services;
 
 import java.util.List;
 
+import com.unla.grupo21.sci.dtos.UsuarioDto;
 import com.unla.grupo21.sci.entities.Usuario;
 import com.unla.grupo21.sci.exceptions.NoEncontradoException;
 
@@ -22,5 +23,13 @@ public interface IUsuarioService {
 	 * @throws NoEncontradoException Si el usuario no existe
 	 */
 	public Usuario traerUsuario(long idUsuario);
+
+	/**
+	 * Almacena un usuario cliente en la base de datos
+	 * 
+	 * @param usuarioDto El objeto DTO que contiene la info para registrar
+	 * @return El usuario registrado con su ID
+	 */
+	public Usuario registrarUsuario(UsuarioDto usuarioDto);
 
 }

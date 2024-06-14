@@ -5,6 +5,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Esta clase realiza la conversión entre dos clases de modelo, generalmente
+ * entre un DTO y una entidad, o viceversa
+ * 
+ * @param <T> La entidad de entrada
+ * @param <Y> La entidada/modelo/dto de salida
+ */
 public abstract class Converter<T, Y> {
 
 	public List<T> convertList(List<Y> models) {

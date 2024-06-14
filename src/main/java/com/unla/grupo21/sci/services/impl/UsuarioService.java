@@ -11,11 +11,15 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.unla.grupo21.sci.converters.impl.UsuarioConverter;
+import com.unla.grupo21.sci.dtos.UsuarioDto;
 import com.unla.grupo21.sci.entities.Usuario;
 import com.unla.grupo21.sci.entities.UsuarioRol;
 import com.unla.grupo21.sci.exceptions.NoEncontradoException;
+import com.unla.grupo21.sci.exceptions.YaExisteException;
 import com.unla.grupo21.sci.repositories.IUsuarioRepository;
 import com.unla.grupo21.sci.services.IUsuarioService;
 
@@ -28,6 +32,12 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
 
 	@Autowired
 	private IUsuarioRepository usuarioRepository;
+
+	@Autowired
+	private UsuarioConverter usuarioConverter;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -59,6 +69,25 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
 			throw new NoEncontradoException(idUsuario);
 		}
 		return usuarioOptional.get();
+	}
+
+	@Override
+	public Usuario registrarUsuario(UsuarioDto usuarioDto) {
+		Optional<Usuario> usuarioOptional = usuarioRepository.findByUsuario(usuarioDto.getUsuario());
+
+		// El nombre de usuario es unico, por lo que se comprueba por nombre de usuario
+		if (usuarioOptional.isPresent()) {
+			throw new YaExisteException(usuarioDto.getUsuario());
+		}
+
+		Usuario usuario = usuarioConverter.convert(usuarioDto);
+
+		// Ciframos la clave con BCrypt y se la reasignamos a la clave del usuario
+		// que estaba en crudo
+		String claveCifrada = passwordEncoder.encode(usuario.getClave());
+		usuario.setClave(claveCifrada);
+
+		return usuarioRepository.save(usuario);
 	}
 
 }
