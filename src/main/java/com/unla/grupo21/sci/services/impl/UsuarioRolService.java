@@ -3,6 +3,7 @@ package com.unla.grupo21.sci.services.impl;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.unla.grupo21.sci.entities.UsuarioRol;
@@ -13,7 +14,7 @@ import com.unla.grupo21.sci.services.IUsuarioRolService;
 
 @Service
 public class UsuarioRolService implements IUsuarioRolService {
-
+	@Autowired
 	private IUsuarioRolRepository usuarioRolRepository;
 
 	@Override

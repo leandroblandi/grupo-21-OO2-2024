@@ -7,11 +7,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.unla.grupo21.sci.dtos.UsuarioDto;
 import com.unla.grupo21.sci.entities.Usuario;
 import com.unla.grupo21.sci.services.IUsuarioService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api")
@@ -31,5 +36,10 @@ public class UsuarioController {
 		Usuario usuario = usuarioService.traerUsuario(id);
 		return ResponseEntity.ok(usuario);
 	}
-
+	
+	@PostMapping("/usuarios")
+	public ResponseEntity<Usuario> registrarCliente(@Valid @RequestBody UsuarioDto dto) {
+		Usuario usuario = usuarioService.registrarUsuario(dto);
+		return ResponseEntity.ok(usuario);
+	}
 }

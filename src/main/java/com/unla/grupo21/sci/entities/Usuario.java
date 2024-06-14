@@ -16,7 +16,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
@@ -36,7 +36,7 @@ public class Usuario {
 	private long idUsuario;
 
 	@Column(nullable = false, unique = true)
-	@Length(min = 4, max = 64)
+	@Length(min = 2, max = 64)
 	private String usuario;
 
 	@JsonIgnore
@@ -45,18 +45,18 @@ public class Usuario {
 	private String clave;
 
 	@Column(nullable = false)
-	@Length(min = 4, max = 128)
+	@Length(min = 2, max = 128)
 	private String nombre;
 
 	@Column(nullable = false)
-	@Length(min = 4, max = 128)
+	@Length(min = 2, max = 128)
 	private String apellido;
 
 	@Column(nullable = false, unique = true)
 	@Min(0)
 	private int dni;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST })
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST })
 	@JsonManagedReference
 	private UsuarioRol rol;
 

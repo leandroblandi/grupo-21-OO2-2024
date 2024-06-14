@@ -46,6 +46,7 @@ public class SecurityConfiguration {
 
 		return http.authorizeHttpRequests(auth -> {
 					auth.requestMatchers(HttpMethod.POST, "/api/login").permitAll();
+					auth.requestMatchers(HttpMethod.POST, "/api/usuarios").permitAll();
 					auth.anyRequest().authenticated();
 				}).csrf(config -> config.disable())
 				.cors(config -> config.configurationSource(corsConfigurationSource()))

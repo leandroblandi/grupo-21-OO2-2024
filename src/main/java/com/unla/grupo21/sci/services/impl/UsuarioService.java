@@ -21,6 +21,7 @@ import com.unla.grupo21.sci.entities.UsuarioRol;
 import com.unla.grupo21.sci.exceptions.NoEncontradoException;
 import com.unla.grupo21.sci.exceptions.YaExisteException;
 import com.unla.grupo21.sci.repositories.IUsuarioRepository;
+import com.unla.grupo21.sci.services.IUsuarioRolService;
 import com.unla.grupo21.sci.services.IUsuarioService;
 
 /**
@@ -32,6 +33,9 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
 
 	@Autowired
 	private IUsuarioRepository usuarioRepository;
+	
+	@Autowired
+	private IUsuarioRolService rolService;
 
 	@Autowired
 	private UsuarioConverter usuarioConverter;
@@ -86,8 +90,15 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
 		// que estaba en crudo
 		String claveCifrada = passwordEncoder.encode(usuario.getClave());
 		usuario.setClave(claveCifrada);
-
+		
+		// Seteamos roles
+		setearRoles(usuario);
+		
 		return usuarioRepository.save(usuario);
 	}
-
+	
+	private void setearRoles(Usuario usuario) {
+		UsuarioRol rol = rolService.traerUsuarioRol("ROLE_CLIENTE");
+		usuario.setRol(rol);
+	}
 }
