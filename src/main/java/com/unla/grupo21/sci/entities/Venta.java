@@ -44,7 +44,7 @@ public class Venta {
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private Usuario usuario;
-	
+
 	@CreationTimestamp
 	private LocalDateTime fechaCreacion;
 

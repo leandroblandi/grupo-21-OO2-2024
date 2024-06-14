@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 @Builder
 public class ItemVentaDto {
-	
+
 	private Long idArticulo;
-	
+
 	private int cantidad;
 }

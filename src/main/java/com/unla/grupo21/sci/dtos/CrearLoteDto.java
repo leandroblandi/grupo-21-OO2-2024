@@ -6,15 +6,15 @@ import lombok.Data;
 @Data
 @Builder
 public class CrearLoteDto {
-	
+
 	private long idArticulo;
-	
+
 	private int cantidad;
-	
+
 	private double precioCompra;
-	
+
 	private String proveedor;
-	
+
 	private double costo;
 
 }

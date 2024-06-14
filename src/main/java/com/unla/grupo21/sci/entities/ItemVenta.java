@@ -30,17 +30,17 @@ public class ItemVenta {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idItem;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST })
 	private Articulo articulo;
-	
+
 	@Column(nullable = false)
 	@Min(1)
 	private int cantidad;
-	
+
 	@Column(nullable = false)
 	private double subtotal;
-	
+
 	@CreationTimestamp
 	private LocalDateTime fechaCreacion;
 

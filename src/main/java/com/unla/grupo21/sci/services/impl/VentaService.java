@@ -18,18 +18,20 @@ import com.unla.grupo21.sci.services.IArticuloService;
 import com.unla.grupo21.sci.services.IUsuarioService;
 import com.unla.grupo21.sci.services.IVentaService;
 
+import jakarta.transaction.Transactional;
+
 @Service
-public class VentaService implements IVentaService{
+public class VentaService implements IVentaService {
 
 	@Autowired
 	private IVentaRepository ventaRepository;
-	
+
 	@Autowired
 	private IUsuarioService usuarioService;
-	
+
 	@Autowired
 	private IArticuloService articuloService;
-	
+
 	@Override
 	public List<Venta> traerVentas() {
 		return ventaRepository.findAll();
@@ -38,50 +40,51 @@ public class VentaService implements IVentaService{
 	@Override
 	public Venta traerVenta(Long id) {
 		Optional<Venta> ventaOptional = ventaRepository.findById(id);
-		
-		if(ventaOptional.isEmpty()) {
+
+		if (ventaOptional.isEmpty()) {
 			throw new RuntimeException("La venta con ID " + id + " no existe en la base de datos.");
 		}
-		
+
 		return ventaOptional.get();
 	}
 
 	@Override
+	@Transactional
 	public Venta generarVenta(Usuario usuario, List<ItemVentaDto> itemsDto) {
 		Usuario usuarioVenta = usuarioService.traerUsuario(usuario.getIdUsuario());
-		
 		List<ItemVenta> listaItems = convertirItems(itemsDto);
-		
 		double precioFinal = calcularPrecioFinal(listaItems);
-		
-		return Venta.builder().fechaVenta(LocalDate.now()).items(listaItems).precioFinal(precioFinal).usuario(usuarioVenta).build();
+		Venta venta = Venta.builder().fechaVenta(LocalDate.now()).items(listaItems).precioFinal(precioFinal)
+				.usuario(usuarioVenta).build();
+		// TODO: Restar en los lotes, las cantidades de dichos articulos
+		return ventaRepository.save(venta);
 	}
-	
+
 	private ItemVenta convertirItem(ItemVentaDto itemVentaDto) {
 		Articulo articulo = articuloService.traerArticulo(itemVentaDto.getIdArticulo());
-		
+
 		double total = articulo.getPrecioVenta() * itemVentaDto.getCantidad();
-		
-		return ItemVenta.builder().articulo(articulo).cantidad(itemVentaDto.getCantidad()).subtotal(total).build();	
+
+		return ItemVenta.builder().articulo(articulo).cantidad(itemVentaDto.getCantidad()).subtotal(total).build();
 	}
-	
-	private List<ItemVenta> convertirItems(List<ItemVentaDto> itemsVentaDto){
+
+	private List<ItemVenta> convertirItems(List<ItemVentaDto> itemsVentaDto) {
 		List<ItemVenta> items = new ArrayList<ItemVenta>();
-		
-		for(ItemVentaDto itemDto : itemsVentaDto) {
+
+		for (ItemVentaDto itemDto : itemsVentaDto) {
 			items.add(convertirItem(itemDto));
 		}
-		
+
 		return items;
 	}
-	
+
 	private double calcularPrecioFinal(List<ItemVenta> itemsVenta) {
 		double total = 0;
-		 
+
 		for (ItemVenta itemVenta : itemsVenta) {
 			total += itemVenta.getSubtotal();
 		}
-		
+
 		return total;
 	}
 

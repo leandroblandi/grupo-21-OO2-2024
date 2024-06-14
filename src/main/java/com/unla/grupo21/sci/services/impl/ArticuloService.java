@@ -25,13 +25,13 @@ public class ArticuloService implements IArticuloService {
 
 	@Override
 	public Articulo traerArticulo(long id) {
-		
+
 		Optional<Articulo> articuloOptional = articuloRepository.findById(id);
-		
-		if(articuloOptional.isEmpty()) {
+
+		if (articuloOptional.isEmpty()) {
 			throw new RuntimeException("El articulo con ID " + id + " no existe en la base de datos.");
 		}
-		
+
 		return articuloOptional.get();
 	}
 
@@ -45,18 +45,18 @@ public class ArticuloService implements IArticuloService {
 
 		return articuloRepository.save(articulo);
 	}
-	
+
 	@Transactional
 	@Override
 	public Articulo modificarArticulo(Articulo articulo) {
 		traerArticulo(articulo.getIdArticulo());
-		return articuloRepository.save(articulo);	
+		return articuloRepository.save(articulo);
 	}
-	
+
 	@Override
 	public Articulo borrarArticulo(Articulo articulo) {
 		articulo.setActivo(false);
 		return modificarArticulo(articulo);
 	}
-	
+
 }

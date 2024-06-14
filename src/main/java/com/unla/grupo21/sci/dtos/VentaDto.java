@@ -10,8 +10,8 @@ import lombok.Data;
 @Builder
 public class VentaDto {
 	private LocalDate fecha;
-	
+
 	private List<ItemVentaDto> items;
-	
+
 	private Long idUsuario;
 }

@@ -33,11 +33,11 @@ public class UsuarioRol {
 	private int rolId;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="user_id", nullable=false)
+	@JoinColumn(name = "user_id", nullable = false)
 	@JsonBackReference
 	private Usuario usuario;
 
-	@Column(name="rol", nullable=false, length=100)
+	@Column(name = "rol", nullable = false, length = 100)
 	private String rol;
 
 	@CreationTimestamp

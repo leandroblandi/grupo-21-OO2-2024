@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -38,6 +39,7 @@ public class Usuario {
 	@Length(min = 4, max = 64)
 	private String usuario;
 
+	@JsonIgnore
 	@Column(nullable = false)
 	@Length(min = 4, max = 256)
 	private String clave;
@@ -54,19 +56,19 @@ public class Usuario {
 	@Min(0)
 	private int dni;
 
-	@OneToOne(fetch=FetchType.EAGER, cascade = { CascadeType.PERSIST })
+	@OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST })
 	@JsonManagedReference
 	private UsuarioRol rol;
-	
+
 	@Column(nullable = false)
 	private boolean activo;
-	
+
 	@CreationTimestamp
 	private LocalDateTime fechaCreacion;
 
 	@UpdateTimestamp
 	private LocalDateTime fechaActualizacion;
-	
+
 	public String getApellido() {
 		return apellido;
 	}

@@ -17,17 +17,17 @@ import com.unla.grupo21.sci.services.IUsuarioService;
 public class UsuarioController {
 	@Autowired
 	private IUsuarioService usuarioService;
-	
+
 	@GetMapping("/usuarios")
-	public ResponseEntity<List<Usuario>> traerUsuarios(){
+	public ResponseEntity<List<Usuario>> traerUsuarios() {
 		List<Usuario> usuarios = usuarioService.traerUsuarios();
-		return ResponseEntity.ok(usuarios);	
+		return ResponseEntity.ok(usuarios);
 	}
-	
+
 	@GetMapping("/usuarios/{id}")
-	public ResponseEntity<Usuario> traerUsuario(@PathVariable Long id){
+	public ResponseEntity<Usuario> traerUsuario(@PathVariable Long id) {
 		Usuario usuario = usuarioService.traerUsuario(id);
 		return ResponseEntity.ok(usuario);
 	}
-	
+
 }

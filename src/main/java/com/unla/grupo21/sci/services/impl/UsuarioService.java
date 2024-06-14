@@ -24,23 +24,23 @@ import com.unla.grupo21.sci.services.IUsuarioService;
  */
 @Service
 public class UsuarioService implements UserDetailsService, IUsuarioService {
-	
+
 	@Autowired
 	private IUsuarioRepository usuarioRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Optional<Usuario> usuarioOptional = usuarioRepository.findByUsuario(username);
-		if(usuarioOptional.isEmpty()) {
+		if (usuarioOptional.isEmpty()) {
 			throw new UsernameNotFoundException(username);
 		}
-		return buildUser(usuarioOptional.get());	
+		return buildUser(usuarioOptional.get());
 	}
-	
+
 	private User buildUser(Usuario usuario) {
 		return new User(usuario.getUsuario(), usuario.getClave(), buildGrantedAuthorities(usuario.getRol()));
 	}
-	
+
 	private List<GrantedAuthority> buildGrantedAuthorities(UsuarioRol rol) {
 		return Arrays.asList(new SimpleGrantedAuthority(rol.getRol()));
 	}
@@ -53,12 +53,11 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
 	@Override
 	public Usuario traerUsuario(long idUsuario) {
 		Optional<Usuario> usuarioOptional = usuarioRepository.findById(idUsuario);
-		
-		if(usuarioOptional.isEmpty()) {
+
+		if (usuarioOptional.isEmpty()) {
 			throw new RuntimeException("El usuario con ID " + idUsuario + " no existe en la base de datos.");
 		}
 		return usuarioOptional.get();
 	}
-	
-	
+
 }
