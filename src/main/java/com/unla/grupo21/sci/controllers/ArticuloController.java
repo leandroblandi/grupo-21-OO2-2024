@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.unla.grupo21.sci.converters.impl.ArticuloConverter;
 import com.unla.grupo21.sci.dtos.ArticuloDto;
 import com.unla.grupo21.sci.entities.Articulo;
 import com.unla.grupo21.sci.services.IArticuloService;
@@ -24,6 +25,9 @@ public class ArticuloController {
 
 	@Autowired
 	private IArticuloService service;
+
+	@Autowired
+	private ArticuloConverter articuloConverter;
 
 	@GetMapping("/articulos")
 	public ResponseEntity<List<Articulo>> traerArticulos() {
@@ -39,28 +43,20 @@ public class ArticuloController {
 
 	@PostMapping("/articulos")
 	public ResponseEntity<Articulo> crearArticulo(@Valid @RequestBody ArticuloDto articuloDto) {
-		Articulo articulo = Articulo.builder().descripcion(articuloDto.getDescripcion()).costo(articuloDto.getCosto())
-				.precioVenta(articuloDto.getPrecioVenta()).activo(true).build();
-
-		return ResponseEntity.ok(service.crearArticulo(articulo));
+		Articulo articulo = articuloConverter.convert(articuloDto);
+		Articulo articuloDb = service.crearArticulo(articulo);
+		return ResponseEntity.ok(articuloDb);
 	}
 
 	public ResponseEntity<Articulo> borrarArticulo(@PathVariable Long id) {
-
 		Articulo articulo = service.traerArticulo(id);
-
 		return ResponseEntity.ok(service.borrarArticulo(articulo));
 	}
 
 	@PutMapping("/articulos/{id}")
 	public ResponseEntity<Articulo> actualizarArticulo(@PathVariable Long id,
 			@Valid @RequestBody ArticuloDto articuloDto) {
-		Articulo articulo = service.traerArticulo(id);
-		articulo.setCosto(articuloDto.getCosto());
-		articulo.setDescripcion(articuloDto.getDescripcion());
-		articulo.setPrecioVenta(articuloDto.getPrecioVenta());
-
-		return ResponseEntity.ok(service.modificarArticulo(articulo));
+		return ResponseEntity.ok(service.modificarArticulo(id, articuloDto));
 	}
 
 }

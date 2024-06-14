@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.unla.grupo21.sci.dtos.ArticuloDto;
 import com.unla.grupo21.sci.entities.Articulo;
 import com.unla.grupo21.sci.exceptions.NoEncontradoException;
 import com.unla.grupo21.sci.exceptions.YaExisteException;
@@ -50,15 +51,21 @@ public class ArticuloService implements IArticuloService {
 
 	@Transactional
 	@Override
-	public Articulo modificarArticulo(Articulo articulo) {
-		traerArticulo(articulo.getIdArticulo());
+	public Articulo modificarArticulo(long id, ArticuloDto articuloDto) {
+		Articulo articulo = traerArticulo(id);
+
+		articulo.setCosto(articuloDto.getCosto());
+		articulo.setDescripcion(articuloDto.getDescripcion());
+		articulo.setPrecioVenta(articuloDto.getPrecioVenta());
+
 		return articuloRepository.save(articulo);
 	}
 
 	@Override
 	public Articulo borrarArticulo(Articulo articulo) {
+		traerArticulo(articulo.getIdArticulo());
 		articulo.setActivo(false);
-		return modificarArticulo(articulo);
+		return articuloRepository.save(articulo);
 	}
 
 }

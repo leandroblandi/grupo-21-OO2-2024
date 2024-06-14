@@ -44,7 +44,8 @@ public class VentaController {
 	@PostMapping("/ventas")
 	public ResponseEntity<Venta> generarVenta(@Valid @RequestBody VentaDto ventaDto) {
 		Usuario usuario = usuarioService.traerUsuario(ventaDto.getIdUsuario());
-		return ResponseEntity.ok(service.generarVenta(usuario, ventaDto.getItems()));
+		Venta venta = service.generarVenta(usuario, ventaDto.getItems());
+		return ResponseEntity.ok(venta);
 	}
 
 }

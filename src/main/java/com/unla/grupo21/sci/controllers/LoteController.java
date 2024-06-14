@@ -37,7 +37,8 @@ public class LoteController {
 
 	@PostMapping("/lotes")
 	public ResponseEntity<LoteArticulo> crearLote(@Valid @RequestBody CrearLoteDto loteDto) {
-		return ResponseEntity.ok(service.generarAltaLote(loteDto.getIdArticulo(), loteDto.getCantidad(),
-				loteDto.getProveedor(), loteDto.getCosto()));
+		LoteArticulo lote = service.generarAltaLote(loteDto.getIdArticulo(), loteDto.getCantidad(),
+				loteDto.getProveedor(), loteDto.getCosto());
+		return ResponseEntity.ok(lote);
 	}
 }
