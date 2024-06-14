@@ -3,6 +3,7 @@ package com.unla.grupo21.sci.configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -11,10 +12,15 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.unla.grupo21.sci.filters.ValidacionJwtFilter;
 import com.unla.grupo21.sci.services.impl.UsuarioService;
 
 /***
@@ -28,13 +34,25 @@ import com.unla.grupo21.sci.services.impl.UsuarioService;
 public class SecurityConfiguration {
 	@Autowired
 	private UsuarioService userService;
+	
+	@Autowired
+    private AuthenticationConfiguration authenticationConfiguration;
 
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		
+		 AuthenticationManager authenticationManager = authenticationManager(authenticationConfiguration);
+		 
 		return http.csrf(AbstractHttpConfigurer::disable).cors(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(auth -> {
-					auth.anyRequest().permitAll();
-				}).build();
+					auth.requestMatchers(HttpMethod.POST, "/api/login").permitAll();
+					auth.anyRequest().authenticated();
+				})
+				.csrf(config -> config.disable())
+				.cors(config -> config.configurationSource(corsConfigurationSource()))
+				.addFilter(new ValidacionJwtFilter(authenticationManager))
+				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.build();
 	}
 
 	@Bean
@@ -55,4 +73,17 @@ public class SecurityConfiguration {
 	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+	
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        
+        configuration.addAllowedOrigin("");
+        configuration.addAllowedMethod("*");
+        configuration.addAllowedHeader("*");
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 }

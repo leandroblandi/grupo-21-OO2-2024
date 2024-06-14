@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.unla.grupo21.sci.entities.Articulo;
+import com.unla.grupo21.sci.exceptions.NoEncontradoException;
+import com.unla.grupo21.sci.exceptions.YaExisteException;
 import com.unla.grupo21.sci.repositories.IArticuloRepository;
 import com.unla.grupo21.sci.services.IArticuloService;
 
@@ -29,7 +31,7 @@ public class ArticuloService implements IArticuloService {
 		Optional<Articulo> articuloOptional = articuloRepository.findById(id);
 
 		if (articuloOptional.isEmpty()) {
-			throw new RuntimeException("El articulo con ID " + id + " no existe en la base de datos.");
+			throw new NoEncontradoException(id);
 		}
 
 		return articuloOptional.get();
@@ -40,7 +42,7 @@ public class ArticuloService implements IArticuloService {
 		Optional<Articulo> articuloOptional = articuloRepository.findById(articulo.getIdArticulo());
 
 		if (articuloOptional.isPresent()) {
-			throw new RuntimeException("El articulo ya existe en la base de datos");
+			throw new YaExisteException(articuloOptional.get().getIdArticulo());
 		}
 
 		return articuloRepository.save(articulo);

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.unla.grupo21.sci.entities.Articulo;
 import com.unla.grupo21.sci.entities.LoteArticulo;
+import com.unla.grupo21.sci.exceptions.NoEncontradoException;
+import com.unla.grupo21.sci.exceptions.StockInsuficienteException;
 import com.unla.grupo21.sci.repositories.ILoteArticuloRepository;
 import com.unla.grupo21.sci.services.IArticuloService;
 import com.unla.grupo21.sci.services.ILoteArticuloService;
@@ -32,7 +34,7 @@ public class LoteArticuloService implements ILoteArticuloService {
 		Optional<LoteArticulo> loteOptional = loteArticuloRepository.findById(id);
 
 		if (loteOptional.isEmpty()) {
-			throw new RuntimeException("El lote con ID " + id + " no existe en la base de datos.");
+			throw new NoEncontradoException(id);
 		}
 		return loteOptional.get();
 	}
@@ -53,14 +55,13 @@ public class LoteArticuloService implements ILoteArticuloService {
 		Optional<LoteArticulo> loteOptional = loteArticuloRepository.findByArticulo(articulo);
 
 		if (loteOptional.isEmpty()) {
-			throw new RuntimeException("El lote a actualizar cantidad no existe");
+			throw new NoEncontradoException(articulo.getDescripcion());
 		}
 
 		LoteArticulo lote = loteOptional.get();
 
 		if (lote.getCantidad() < cantidadRequerida) {
-			throw new RuntimeException(
-					"No hay suficiente stock para realizar la compra. Stock disponible: " + lote.getCantidad());
+			throw new StockInsuficienteException(lote.getCantidad());
 		}
 
 		lote.setCantidad(lote.getCantidad() - cantidadRequerida);

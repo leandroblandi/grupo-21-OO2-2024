@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.unla.grupo21.sci.entities.Usuario;
 import com.unla.grupo21.sci.entities.UsuarioRol;
+import com.unla.grupo21.sci.exceptions.NoEncontradoException;
 import com.unla.grupo21.sci.repositories.IUsuarioRepository;
 import com.unla.grupo21.sci.services.IUsuarioService;
 
@@ -55,7 +56,7 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
 		Optional<Usuario> usuarioOptional = usuarioRepository.findById(idUsuario);
 
 		if (usuarioOptional.isEmpty()) {
-			throw new RuntimeException("El usuario con ID " + idUsuario + " no existe en la base de datos.");
+			throw new NoEncontradoException(idUsuario);
 		}
 		return usuarioOptional.get();
 	}
