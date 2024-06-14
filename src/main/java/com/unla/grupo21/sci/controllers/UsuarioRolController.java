@@ -19,32 +19,32 @@ import com.unla.grupo21.sci.services.IUsuarioRolService;
 @RequestMapping("/api")
 @CrossOrigin(origins = "*")
 public class UsuarioRolController {
-	
+
 	@Autowired
 	private IUsuarioRolService service;
-	
+
 	@GetMapping("/roles")
-	public ResponseEntity<List<UsuarioRol>> traerRoles(){
+	public ResponseEntity<List<UsuarioRol>> traerRoles() {
 		List<UsuarioRol> rolesUsuario = service.traerUsuarioRol();
 		return ResponseEntity.ok(rolesUsuario);
 	}
-	
+
 	@GetMapping("/roles/{id}")
-	public ResponseEntity<UsuarioRol> traerUsuarioRol(@PathVariable Integer id){
+	public ResponseEntity<UsuarioRol> traerUsuarioRol(@PathVariable Integer id) {
 		UsuarioRol rol = service.traerUsuarioRol(id);
 		return ResponseEntity.ok(rol);
 	}
-	
+
 	@GetMapping("/roles/{nombre}")
-	public ResponseEntity<UsuarioRol> traerUsuarioRol(@PathVariable String nombre){
+	public ResponseEntity<UsuarioRol> traerUsuarioRol(@PathVariable String nombre) {
 		UsuarioRol rol = service.traerUsuarioRol(nombre);
 		return ResponseEntity.ok(rol);
 	}
-	
+
 	@PostMapping("/roles")
-	public ResponseEntity<UsuarioRol> crearUsuarioRol(@RequestParam String nombre){
+	public ResponseEntity<UsuarioRol> crearUsuarioRol(@RequestParam String nombre) {
 		UsuarioRol rol = service.crearUsuarioRol(nombre);
 		return ResponseEntity.ok(rol);
 	}
-	
+
 }
