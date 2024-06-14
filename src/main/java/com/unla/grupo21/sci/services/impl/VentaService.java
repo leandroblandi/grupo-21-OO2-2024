@@ -15,6 +15,7 @@ import com.unla.grupo21.sci.entities.Usuario;
 import com.unla.grupo21.sci.entities.Venta;
 import com.unla.grupo21.sci.repositories.IVentaRepository;
 import com.unla.grupo21.sci.services.IArticuloService;
+import com.unla.grupo21.sci.services.ILoteArticuloService;
 import com.unla.grupo21.sci.services.IUsuarioService;
 import com.unla.grupo21.sci.services.IVentaService;
 
@@ -31,6 +32,9 @@ public class VentaService implements IVentaService {
 
 	@Autowired
 	private IArticuloService articuloService;
+	
+	@Autowired
+	private ILoteArticuloService loteService;
 
 	@Override
 	public List<Venta> traerVentas() {
@@ -54,9 +58,10 @@ public class VentaService implements IVentaService {
 		Usuario usuarioVenta = usuarioService.traerUsuario(usuario.getIdUsuario());
 		List<ItemVenta> listaItems = convertirItems(itemsDto);
 		double precioFinal = calcularPrecioFinal(listaItems);
+		
 		Venta venta = Venta.builder().fechaVenta(LocalDate.now()).items(listaItems).precioFinal(precioFinal)
 				.usuario(usuarioVenta).build();
-		// TODO: Restar en los lotes, las cantidades de dichos articulos
+		restarCantidadesEnLote(listaItems);
 		return ventaRepository.save(venta);
 	}
 
@@ -87,5 +92,10 @@ public class VentaService implements IVentaService {
 
 		return total;
 	}
-
+	
+	private void restarCantidadesEnLote(List<ItemVenta> items) {
+		for (ItemVenta item : items) {
+			loteService.actualizarCantidadEnLote(item.getArticulo(), item.getCantidad());
+		}
+	}
 }

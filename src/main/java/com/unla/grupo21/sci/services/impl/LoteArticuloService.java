@@ -46,4 +46,24 @@ public class LoteArticuloService implements ILoteArticuloService {
 				.precioCompra(precioFinal).proveedor(proveedor).fechaRecepcion(LocalDateTime.now()).build();
 		return loteArticuloRepository.save(loteArticulo);
 	}
+
+	@Override
+	public void actualizarCantidadEnLote(Articulo articulo, int cantidadRequerida) {
+
+		Optional<LoteArticulo> loteOptional = loteArticuloRepository.findByArticulo(articulo);
+
+		if (loteOptional.isEmpty()) {
+			throw new RuntimeException("El lote a actualizar cantidad no existe");
+		}
+
+		LoteArticulo lote = loteOptional.get();
+
+		if (lote.getCantidad() < cantidadRequerida) {
+			throw new RuntimeException(
+					"No hay suficiente stock para realizar la compra. Stock disponible: " + lote.getCantidad());
+		}
+
+		lote.setCantidad(lote.getCantidad() - cantidadRequerida);
+		loteArticuloRepository.save(lote);
+	}
 }
