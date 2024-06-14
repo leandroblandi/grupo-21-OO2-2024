@@ -1,15 +1,21 @@
 package com.unla.grupo21.sci.services.impl;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.unla.grupo21.sci.dtos.ItemVentaDto;
+import com.unla.grupo21.sci.entities.Articulo;
 import com.unla.grupo21.sci.entities.ItemVenta;
 import com.unla.grupo21.sci.entities.Usuario;
 import com.unla.grupo21.sci.entities.Venta;
 import com.unla.grupo21.sci.repositories.IVentaRepository;
+import com.unla.grupo21.sci.services.IArticuloService;
+import com.unla.grupo21.sci.services.IUsuarioService;
 import com.unla.grupo21.sci.services.IVentaService;
 
 @Service
@@ -17,6 +23,12 @@ public class VentaService implements IVentaService{
 
 	@Autowired
 	private IVentaRepository ventaRepository;
+	
+	@Autowired
+	private IUsuarioService usuarioService;
+	
+	@Autowired
+	private IArticuloService articuloService;
 	
 	@Override
 	public List<Venta> traerVentas() {
@@ -35,9 +47,42 @@ public class VentaService implements IVentaService{
 	}
 
 	@Override
-	public Venta generarVenta(Usuario usuario, List<ItemVenta> items) {
-		// TODO Auto-generated method stub
-		return null;
+	public Venta generarVenta(Usuario usuario, List<ItemVentaDto> itemsDto) {
+		Usuario usuarioVenta = usuarioService.traerUsuario(usuario.getIdUsuario());
+		
+		List<ItemVenta> listaItems = convertirItems(itemsDto);
+		
+		double precioFinal = calcularPrecioFinal(listaItems);
+		
+		return Venta.builder().fechaVenta(LocalDate.now()).items(listaItems).precioFinal(precioFinal).usuario(usuarioVenta).build();
+	}
+	
+	private ItemVenta convertirItem(ItemVentaDto itemVentaDto) {
+		Articulo articulo = articuloService.traerArticulo(itemVentaDto.getIdArticulo());
+		
+		double total = articulo.getPrecioVenta() * itemVentaDto.getCantidad();
+		
+		return ItemVenta.builder().articulo(articulo).cantidad(itemVentaDto.getCantidad()).subtotal(total).build();	
+	}
+	
+	private List<ItemVenta> convertirItems(List<ItemVentaDto> itemsVentaDto){
+		List<ItemVenta> items = new ArrayList<ItemVenta>();
+		
+		for(ItemVentaDto itemDto : itemsVentaDto) {
+			items.add(convertirItem(itemDto));
+		}
+		
+		return items;
+	}
+	
+	private double calcularPrecioFinal(List<ItemVenta> itemsVenta) {
+		double total = 0;
+		 
+		for (ItemVenta itemVenta : itemsVenta) {
+			total += itemVenta.getSubtotal();
+		}
+		
+		return total;
 	}
 
 }
