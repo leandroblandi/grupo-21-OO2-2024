@@ -10,7 +10,7 @@ public class YaExisteException extends RuntimeException {
 	public YaExisteException(Long id) {
 		super("El recurso con id " + id + " ya existe");
 	}
-	
+
 	public YaExisteException(String nombre) {
 		super("El recurso con nombre " + nombre + " ya existe");
 	}

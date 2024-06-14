@@ -8,5 +8,5 @@ import com.unla.grupo21.sci.entities.UsuarioRol;
 
 public interface IUsuarioRolRepository extends JpaRepository<UsuarioRol, Integer> {
 	public Optional<UsuarioRol> findByRol(String rol);
-	
+
 }

@@ -33,7 +33,7 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
 
 	@Autowired
 	private IUsuarioRepository usuarioRepository;
-	
+
 	@Autowired
 	private IUsuarioRolService rolService;
 
@@ -90,13 +90,13 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
 		// que estaba en crudo
 		String claveCifrada = passwordEncoder.encode(usuario.getClave());
 		usuario.setClave(claveCifrada);
-		
+
 		// Seteamos roles
 		setearRoles(usuario);
-		
+
 		return usuarioRepository.save(usuario);
 	}
-	
+
 	private void setearRoles(Usuario usuario) {
 		UsuarioRol rol = rolService.traerUsuarioRol("ROLE_CLIENTE");
 		usuario.setRol(rol);

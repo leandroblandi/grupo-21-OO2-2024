@@ -36,7 +36,7 @@ public class UsuarioController {
 		Usuario usuario = usuarioService.traerUsuario(id);
 		return ResponseEntity.ok(usuario);
 	}
-	
+
 	@PostMapping("/usuarios")
 	public ResponseEntity<Usuario> registrarCliente(@Valid @RequestBody UsuarioDto dto) {
 		Usuario usuario = usuarioService.registrarUsuario(dto);

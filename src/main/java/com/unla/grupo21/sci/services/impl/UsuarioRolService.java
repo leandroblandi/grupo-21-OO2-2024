@@ -30,7 +30,7 @@ public class UsuarioRolService implements IUsuarioRolService {
 		}
 		return usuarioRolOptional.get();
 	}
-	
+
 	@Override
 	public UsuarioRol traerUsuarioRol(String nombre) {
 		Optional<UsuarioRol> usuarioRolOptional = usuarioRolRepository.findByRol(nombre);

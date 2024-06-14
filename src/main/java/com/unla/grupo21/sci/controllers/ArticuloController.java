@@ -50,7 +50,7 @@ public class ArticuloController {
 		Articulo articuloDb = service.crearArticulo(articulo);
 		return ResponseEntity.ok(articuloDb);
 	}
-	
+
 	@DeleteMapping("/articulos/{id}")
 	public ResponseEntity<Articulo> borrarArticulo(@PathVariable Long id) {
 		Articulo articulo = service.traerArticulo(id);

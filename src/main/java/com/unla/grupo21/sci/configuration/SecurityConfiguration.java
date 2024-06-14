@@ -45,11 +45,10 @@ public class SecurityConfiguration {
 		AuthenticationManager authenticationManager = authenticationManager(authenticationConfiguration);
 
 		return http.authorizeHttpRequests(auth -> {
-					auth.requestMatchers(HttpMethod.POST, "/api/login").permitAll();
-					auth.requestMatchers(HttpMethod.POST, "/api/usuarios").permitAll();
-					auth.anyRequest().authenticated();
-				}).csrf(config -> config.disable())
-				.cors(config -> config.configurationSource(corsConfigurationSource()))
+			auth.requestMatchers(HttpMethod.POST, "/api/login").permitAll();
+			auth.requestMatchers(HttpMethod.POST, "/api/usuarios").permitAll();
+			auth.anyRequest().authenticated();
+		}).csrf(config -> config.disable()).cors(config -> config.configurationSource(corsConfigurationSource()))
 				.addFilter(new ValidacionJwtFilter(authenticationManager))
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).build();
 	}

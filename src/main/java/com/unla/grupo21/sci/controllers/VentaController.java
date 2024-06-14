@@ -20,7 +20,6 @@ import com.unla.grupo21.sci.services.IVentaService;
 
 import jakarta.validation.Valid;
 
-
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = "*")

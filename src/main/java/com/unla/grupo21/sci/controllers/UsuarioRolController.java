@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.unla.grupo21.sci.entities.UsuarioRol;
 import com.unla.grupo21.sci.services.IUsuarioRolService;
-import com.unla.grupo21.sci.services.IUsuarioService;
 
 @RestController
 @RequestMapping("/api")
