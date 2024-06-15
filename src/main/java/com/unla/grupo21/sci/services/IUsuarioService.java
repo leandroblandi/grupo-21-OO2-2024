@@ -28,8 +28,9 @@ public interface IUsuarioService {
 	 * Almacena un usuario cliente en la base de datos
 	 * 
 	 * @param usuarioDto El objeto DTO que contiene la info para registrar
+	 * @param administrador Si el usuario a crear debe ser administrador
 	 * @return El usuario registrado con su ID
 	 */
-	public Usuario registrarUsuario(UsuarioDto usuarioDto);
+	public Usuario registrarUsuario(UsuarioDto usuarioDto, boolean administrador);
 
 }

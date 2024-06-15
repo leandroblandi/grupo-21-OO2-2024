@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -19,11 +20,19 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestControllerAdvice
 public class ErrorController extends ResponseEntityExceptionHandler {
-
+	
+	@ExceptionHandler(AuthenticationCredentialsNotFoundException.class)
+	public ResponseEntity<ErrorDetailsDto> handleException(AuthenticationCredentialsNotFoundException e) {
+		log.error(e.getMessage());
+		String mensaje = "Error al autenticar: datos incorrectos";
+		ErrorDetailsDto dto = ErrorDetailsDto.builder().date(LocalDateTime.now()).details(mensaje).build();
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(dto);
+	}
+	
 	@ExceptionHandler(AuthenticationException.class)
 	public ResponseEntity<ErrorDetailsDto> handleException(AuthenticationException e) {
 		log.error(e.getMessage());
-		String mensaje = "Error al autenticar: datos incorrectos";
+		String mensaje = "Error al autenticar: error inesperado";
 		ErrorDetailsDto dto = ErrorDetailsDto.builder().date(LocalDateTime.now()).details(mensaje).build();
 		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(dto);
 	}
@@ -48,4 +57,5 @@ public class ErrorController extends ResponseEntityExceptionHandler {
 		ErrorDetailsDto dto = ErrorDetailsDto.builder().date(LocalDateTime.now()).details(e.getMessage()).build();
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(dto);
 	}
+
 }

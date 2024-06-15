@@ -39,7 +39,13 @@ public class UsuarioController {
 
 	@PostMapping("/usuarios")
 	public ResponseEntity<Usuario> registrarCliente(@Valid @RequestBody UsuarioDto dto) {
-		Usuario usuario = usuarioService.registrarUsuario(dto);
+		Usuario usuario = usuarioService.registrarUsuario(dto, false);
+		return ResponseEntity.ok(usuario);
+	}
+	
+	@PostMapping("/usuarios/admin")
+	public ResponseEntity<Usuario> registrarAdministrador(@Valid @RequestBody UsuarioDto dto) {
+		Usuario usuario = usuarioService.registrarUsuario(dto, true);
 		return ResponseEntity.ok(usuario);
 	}
 }

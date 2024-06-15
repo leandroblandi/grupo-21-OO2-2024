@@ -25,7 +25,6 @@ import jakarta.validation.Valid;
 @RequestMapping("/api")
 @CrossOrigin(origins = "*")
 public class ArticuloController {
-
 	@Autowired
 	private IArticuloService service;
 

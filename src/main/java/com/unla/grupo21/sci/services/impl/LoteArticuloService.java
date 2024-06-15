@@ -68,12 +68,17 @@ public class LoteArticuloService implements ILoteArticuloService {
 		loteArticuloRepository.save(lote);
 	}
 
+	@Override
 	public LoteArticulo aprovisionarLote(Articulo articulo, int cantidadRequerida) {
 		Optional<LoteArticulo> loteOptional = loteArticuloRepository.findByArticulo(articulo);
 
+		if (loteOptional.isEmpty()) {
+			throw new NoEncontradoException(articulo.getDescripcion());
+		}
+		
 		LoteArticulo lote = loteOptional.get();
-
 		lote.setCantidad(lote.getCantidad() + cantidadRequerida);
+		
 		return loteArticuloRepository.save(lote);
 	}
 }

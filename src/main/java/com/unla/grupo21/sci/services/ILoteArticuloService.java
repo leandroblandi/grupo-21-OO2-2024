@@ -48,6 +48,15 @@ public interface ILoteArticuloService {
 	 *                                    hay en stock
 	 */
 	public void actualizarCantidadEnLote(Articulo articulo, int cantidadRequerida);
-	
+
+	/**
+	 * 
+	 * Realiza una actualizacion de las cantidades de un lote con un articulo
+	 * especifico, aprovisiona un lote que corresponda con el articulo deseado
+	 * 
+	 * @param articulo          El articulo del lote
+	 * @param cantidadRequerida La cantidad a aprovisionar
+	 * @return El lote con la nueva cantidad
+	 */
 	public LoteArticulo aprovisionarLote(Articulo articulo, int cantidadRequerida);
 }

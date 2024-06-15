@@ -76,7 +76,7 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
 	}
 
 	@Override
-	public Usuario registrarUsuario(UsuarioDto usuarioDto) {
+	public Usuario registrarUsuario(UsuarioDto usuarioDto, boolean administrador) {
 		Optional<Usuario> usuarioOptional = usuarioRepository.findByUsuario(usuarioDto.getUsuario());
 
 		// El nombre de usuario es unico, por lo que se comprueba por nombre de usuario
@@ -92,13 +92,18 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
 		usuario.setClave(claveCifrada);
 
 		// Seteamos roles
-		setearRoles(usuario);
+		setearRoles(usuario, administrador);
 
 		return usuarioRepository.save(usuario);
 	}
 
-	private void setearRoles(Usuario usuario) {
+	private void setearRoles(Usuario usuario, boolean administrador) {
 		UsuarioRol rol = rolService.traerUsuarioRol("ROLE_CLIENTE");
+
+		if (administrador) {
+			rol = rolService.traerUsuarioRol("ROLE_ADMINISTRADOR");
+		}
+
 		usuario.setRol(rol);
 	}
 }

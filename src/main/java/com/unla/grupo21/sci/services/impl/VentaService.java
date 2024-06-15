@@ -65,12 +65,24 @@ public class VentaService implements IVentaService {
 		return ventaRepository.save(venta);
 	}
 
+	/**
+	 * Convierte un DTO de ItemVenta a la entidad ItemVenta
+	 * 
+	 * @param itemVentaDto El objeto DTO ItemVentaDto
+	 * @return Un objeto ItemVenta
+	 */
 	private ItemVenta convertirItem(ItemVentaDto itemVentaDto) {
 		Articulo articulo = articuloService.traerArticulo(itemVentaDto.getIdArticulo());
 		double total = articulo.getPrecioVenta() * itemVentaDto.getCantidad();
 		return ItemVenta.builder().articulo(articulo).cantidad(itemVentaDto.getCantidad()).subtotal(total).build();
 	}
 
+	/**
+	 * Convierte una lista de ItemVentaDto
+	 * 
+	 * @param itemsVentaDto La lista de objetos ItemVentaDto
+	 * @return Una lista de entidades ItemVenta
+	 */
 	private List<ItemVenta> convertirItems(List<ItemVentaDto> itemsVentaDto) {
 		List<ItemVenta> items = new ArrayList<ItemVenta>();
 		for (ItemVentaDto itemDto : itemsVentaDto) {
@@ -79,6 +91,13 @@ public class VentaService implements IVentaService {
 		return items;
 	}
 
+	/**
+	 * Recorre las entidades ItemVenta, y realiza la suma total de
+	 * los subtotales
+	 * 
+	 * @param itemsVenta La lista de objetos ItemVenta
+	 * @return El precio total de todos los items de la venta
+	 */
 	private double calcularPrecioFinal(List<ItemVenta> itemsVenta) {
 		double total = 0;
 		for (ItemVenta itemVenta : itemsVenta) {
@@ -87,6 +106,12 @@ public class VentaService implements IVentaService {
 		return total;
 	}
 
+	/**
+	 * Metodo auxiliar para recorrer cada item, y restarle la cantidad
+	 * al lote correspondiente en el sistema.
+	 * 
+	 * @param items La lista de objetos ItemVenta
+	 */
 	private void restarCantidadesEnLote(List<ItemVenta> items) {
 		for (ItemVenta item : items) {
 			loteService.actualizarCantidadEnLote(item.getArticulo(), item.getCantidad());
