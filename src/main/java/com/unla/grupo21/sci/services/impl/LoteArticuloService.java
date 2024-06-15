@@ -75,10 +75,26 @@ public class LoteArticuloService implements ILoteArticuloService {
 		if (loteOptional.isEmpty()) {
 			throw new NoEncontradoException(articulo.getDescripcion());
 		}
-		
+
 		LoteArticulo lote = loteOptional.get();
 		lote.setCantidad(lote.getCantidad() + cantidadRequerida);
-		
+
 		return loteArticuloRepository.save(lote);
+	}
+
+	@Override
+	public boolean eliminarLote(Long id) {
+		Optional<LoteArticulo> loteOptional = loteArticuloRepository.findById(id);
+
+		if (loteOptional.isEmpty()) {
+			throw new NoEncontradoException(id);
+		}
+		LoteArticulo lote = loteOptional.get();
+		try {
+			loteArticuloRepository.delete(lote);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 }
