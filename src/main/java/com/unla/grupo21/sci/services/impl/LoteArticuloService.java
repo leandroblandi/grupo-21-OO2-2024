@@ -67,4 +67,13 @@ public class LoteArticuloService implements ILoteArticuloService {
 		lote.setCantidad(lote.getCantidad() - cantidadRequerida);
 		loteArticuloRepository.save(lote);
 	}
+
+	public LoteArticulo aprovisionarLote(Articulo articulo, int cantidadRequerida) {
+		Optional<LoteArticulo> loteOptional = loteArticuloRepository.findByArticulo(articulo);
+
+		LoteArticulo lote = loteOptional.get();
+
+		lote.setCantidad(lote.getCantidad() + cantidadRequerida);
+		return loteArticuloRepository.save(lote);
+	}
 }

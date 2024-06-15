@@ -8,12 +8,15 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.unla.grupo21.sci.dtos.CrearLoteDto;
 import com.unla.grupo21.sci.entities.LoteArticulo;
+import com.unla.grupo21.sci.services.IArticuloService;
 import com.unla.grupo21.sci.services.ILoteArticuloService;
 
 import jakarta.validation.Valid;
@@ -25,6 +28,9 @@ public class LoteController {
 	@Autowired
 	private ILoteArticuloService service;
 
+	@Autowired
+	private IArticuloService serviceArticulo;
+	
 	@GetMapping("/lotes")
 	public ResponseEntity<List<LoteArticulo>> traerLotes() {
 		List<LoteArticulo> lotes = service.traerLotes();
@@ -43,4 +49,11 @@ public class LoteController {
 				loteDto.getProveedor(), loteDto.getCosto());
 		return ResponseEntity.ok(lote);
 	}
+	
+	@PutMapping("/lotes/articulo/{articuloId}")
+	public ResponseEntity<LoteArticulo> provisionarLoteaprovisionarLote(@PathVariable Long articuloId,@RequestParam(required = true) int cantidadRequerida){
+		LoteArticulo lote = service.aprovisionarLote(serviceArticulo.traerArticulo(articuloId), cantidadRequerida);
+		return ResponseEntity.ok(lote);
+	}
+	
 }

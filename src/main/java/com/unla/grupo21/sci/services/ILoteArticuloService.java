@@ -48,4 +48,6 @@ public interface ILoteArticuloService {
 	 *                                    hay en stock
 	 */
 	public void actualizarCantidadEnLote(Articulo articulo, int cantidadRequerida);
+	
+	public LoteArticulo aprovisionarLote(Articulo articulo, int cantidadRequerida);
 }
