@@ -45,6 +45,7 @@ public class SecurityConfiguration {
 		AuthenticationManager authenticationManager = authenticationManager(authenticationConfiguration);
 
 		return http.authorizeHttpRequests(auth -> {
+			auth.requestMatchers(HttpMethod.POST, "/api/status").permitAll();
 			auth.requestMatchers(HttpMethod.POST, "/api/login").permitAll();
 			auth.requestMatchers(HttpMethod.POST, "/api/usuarios").permitAll();
 			auth.anyRequest().authenticated();
