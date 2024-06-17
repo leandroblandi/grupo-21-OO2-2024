@@ -53,7 +53,7 @@ public class ArticuloService implements IArticuloService {
 		if (articuloOptional.isPresent()) {
 			throw new YaExisteException(articuloOptional.get().getIdArticulo());
 		}
-
+		articulo.setEstaEnUnLote(false);
 		Articulo articuloDb = articuloRepository.save(articulo);
 		loteService.generarAltaLote(articuloDb.getIdArticulo(), CANTIDAD_DEFECTO_LOTE, "Default supplier SA", articuloDb.getCosto());
 

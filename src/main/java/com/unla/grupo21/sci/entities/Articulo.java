@@ -46,4 +46,7 @@ public class Articulo {
 
 	@Column(nullable = false)
 	private boolean activo;
+	
+	@Column(nullable = false)
+	private boolean estaEnUnLote;
 }
