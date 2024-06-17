@@ -4,16 +4,19 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.unla.grupo21.sci.dtos.ArticuloCantidadDto;
 import com.unla.grupo21.sci.dtos.ItemVentaDto;
 import com.unla.grupo21.sci.entities.Articulo;
 import com.unla.grupo21.sci.entities.ItemVenta;
 import com.unla.grupo21.sci.entities.Usuario;
 import com.unla.grupo21.sci.entities.Venta;
 import com.unla.grupo21.sci.exceptions.NoEncontradoException;
+import com.unla.grupo21.sci.repositories.IItemVentaRepository;
 import com.unla.grupo21.sci.repositories.IVentaRepository;
 import com.unla.grupo21.sci.services.IArticuloService;
 import com.unla.grupo21.sci.services.ILoteArticuloService;
@@ -35,6 +38,9 @@ public class VentaService implements IVentaService {
 
 	@Autowired
 	private ILoteArticuloService loteService;
+	
+	@Autowired
+    private IItemVentaRepository itemVentaRepository;
 
 	@Override
 	public List<Venta> traerVentas() {
@@ -117,4 +123,13 @@ public class VentaService implements IVentaService {
 			loteService.actualizarCantidadEnLote(item.getArticulo(), item.getCantidad());
 		}
 	}
+	
+	@Override
+    public List<ArticuloCantidadDto> traerArticulosMasVendidos() {
+    	 List<Object[]> results = itemVentaRepository.traerArticulosMasVendidos();
+         return results.stream()
+                 .map(result -> ArticuloCantidadDto.builder().articulo((Articulo)result[0]).cantidad((Long)result[1]).build())
+                 .collect(Collectors.toList());
+    }
+
 }

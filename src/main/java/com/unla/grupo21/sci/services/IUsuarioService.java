@@ -24,6 +24,7 @@ public interface IUsuarioService {
 	 */
 	public Usuario traerUsuario(long idUsuario);
 
+	public Usuario traerUsuario(String nombreUsuario);
 	/**
 	 * Almacena un usuario cliente en la base de datos
 	 * 

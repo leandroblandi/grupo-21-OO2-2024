@@ -36,6 +36,12 @@ public class UsuarioController {
 		Usuario usuario = usuarioService.traerUsuario(id);
 		return ResponseEntity.ok(usuario);
 	}
+	
+	@GetMapping("/usuarios/{nombreUsuario}")
+	public ResponseEntity<Usuario> traerUsuario(@PathVariable String nombreUsuario) {
+		Usuario usuario = usuarioService.traerUsuario(nombreUsuario);
+		return ResponseEntity.ok(usuario);
+	}
 
 	@PostMapping("/usuarios")
 	public ResponseEntity<Usuario> registrarCliente(@Valid @RequestBody UsuarioDto dto) {
@@ -48,4 +54,7 @@ public class UsuarioController {
 		Usuario usuario = usuarioService.registrarUsuario(dto, true);
 		return ResponseEntity.ok(usuario);
 	}
+	
+	
+	
 }

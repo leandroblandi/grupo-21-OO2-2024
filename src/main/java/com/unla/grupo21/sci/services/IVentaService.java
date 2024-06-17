@@ -2,10 +2,12 @@ package com.unla.grupo21.sci.services;
 
 import java.util.List;
 
+import com.unla.grupo21.sci.dtos.ArticuloCantidadDto;
 import com.unla.grupo21.sci.dtos.ItemVentaDto;
 import com.unla.grupo21.sci.entities.Usuario;
 import com.unla.grupo21.sci.entities.Venta;
 import com.unla.grupo21.sci.exceptions.NoEncontradoException;
+
 
 public interface IVentaService {
 
@@ -35,4 +37,6 @@ public interface IVentaService {
 	 * @return Un objeto Venta con los datos
 	 */
 	public Venta generarVenta(Usuario usuario, List<ItemVentaDto> itemsDto);
+	
+	public List<ArticuloCantidadDto> traerArticulosMasVendidos();
 }

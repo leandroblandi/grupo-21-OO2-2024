@@ -76,6 +76,16 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
 	}
 
 	@Override
+	public Usuario traerUsuario(String nombreUsuario) {
+		Optional<Usuario> usuarioOptional = usuarioRepository.findByUsuario(nombreUsuario);
+
+		if (usuarioOptional.isEmpty()) {
+			throw new NoEncontradoException(nombreUsuario);
+		}
+		return usuarioOptional.get();
+	}
+	
+	@Override
 	public Usuario registrarUsuario(UsuarioDto usuarioDto, boolean administrador) {
 		Optional<Usuario> usuarioOptional = usuarioRepository.findByUsuario(usuarioDto.getUsuario());
 
@@ -106,4 +116,6 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
 
 		usuario.setRol(rol);
 	}
+
+	
 }

@@ -1,8 +1,8 @@
 -- DELETEs de las tablas, para insertar datos
-DELETE FROM `tpc-oo2`.`lote_articulos`;
-DELETE FROM `tpc-oo2`.`articulos`;
-DELETE FROM `tpc-oo2`.`usuarios`;
-DELETE FROM `tpc-oo2`.`roles`;
+-- DELETE FROM `tpc-oo2`.`lote_articulos`;
+-- DELETE FROM `tpc-oo2`.`articulos`;
+-- DELETE FROM `tpc-oo2`.`usuarios`;
+-- DELETE FROM `tpc-oo2`.`roles`;
 
 -- INSERTs de roles
 
@@ -70,3 +70,20 @@ WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`lote_articulos` WHERE `id_lote` = '2'
 INSERT INTO `tpc-oo2`.`lote_articulos` (`id_lote`, `cantidad`, `fecha_actualizacion`, `fecha_creacion`, `fecha_recepcion`, `precio_compra`, `proveedor`, `articulo_id`)
 SELECT '3', '200', '2024-06-14 15:31:53.962542', '2024-06-14 15:31:53.962542', '2024-06-14 15:31:53.962542', '24000.00', 'Gamers Store Latam', '3'
 WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`lote_articulos` WHERE `id_lote` = '3');
+
+-- INSERTs de item_venta
+
+INSERT INTO `tpc-oo2`.`items_venta` (`id_item`, `cantidad`, `subtotal`, `articulo_id_articulo`) VALUES ('1', '13', '5000.00', '1');
+INSERT INTO `tpc-oo2`.`items_venta` (`id_item`, `cantidad`, `subtotal`, `articulo_id_articulo`) VALUES ('2', '70', '9000.00', '3');
+INSERT INTO `tpc-oo2`.`items_venta` (`id_item`, `cantidad`, `subtotal`, `articulo_id_articulo`) VALUES ('3', '21', '2500.00', '2');
+
+-- INSERTs de venta
+
+INSERT INTO `tpc-oo2`.`ventas` (`id_venta`, `fecha_venta`, `precio_final`, `usuario_id_usuario`) VALUES ('1', '2024-01-01', '20000.00', '2');
+
+-- INSERTs de venta_item
+
+iNSERT INTO `tpc-oo2`.`ventas_items` (`venta_id_venta`, `items_id_item`) VALUES ('1', '1');
+INSERT INTO `tpc-oo2`.`ventas_items` (`venta_id_venta`, `items_id_item`) VALUES ('1', '2');
+INSERT INTO `tpc-oo2`.`ventas_items` (`venta_id_venta`, `items_id_item`) VALUES ('1', '3');
+
