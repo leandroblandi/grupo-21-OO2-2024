@@ -48,6 +48,10 @@ public class SecurityConfiguration {
 			auth.requestMatchers(HttpMethod.GET, "/api/status").permitAll();
 			auth.requestMatchers(HttpMethod.POST, "/api/login").permitAll();
 			auth.requestMatchers(HttpMethod.POST, "/api/usuarios").permitAll();
+			auth.requestMatchers("/api/lotes").hasRole("ADMINISTRADOR");
+			auth.requestMatchers("/api/roles").hasRole("ADMINISTRADOR");
+			auth.requestMatchers(HttpMethod.GET, "/api/ventas").hasRole("ADMINISTRADOR");
+			auth.requestMatchers(HttpMethod.POST, "/api/articulos").hasRole("ADMINISTRADOR");
 			auth.anyRequest().authenticated();
 		}).csrf(config -> config.disable()).cors(config -> config.configurationSource(corsConfigurationSource()))
 				.addFilter(new ValidacionJwtFilter(authenticationManager))
