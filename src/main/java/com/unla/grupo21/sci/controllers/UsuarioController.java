@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.unla.grupo21.sci.dtos.UsuarioDto;
@@ -37,10 +38,10 @@ public class UsuarioController {
 		return ResponseEntity.ok(usuario);
 	}
 	
-	@GetMapping("/usuarios/{nombreUsuario}")
-	public ResponseEntity<Usuario> traerUsuario(@PathVariable String nombreUsuario) {
-		Usuario usuario = usuarioService.traerUsuario(nombreUsuario);
-		return ResponseEntity.ok(usuario);
+	@GetMapping("/usuarios/usuario")
+	public ResponseEntity<Usuario> traerUsuario(@RequestParam String usuario) {
+		Usuario usuarioDb = usuarioService.traerUsuario(usuario);
+		return ResponseEntity.ok(usuarioDb);
 	}
 
 	@PostMapping("/usuarios")
