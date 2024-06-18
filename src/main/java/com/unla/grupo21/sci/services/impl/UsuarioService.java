@@ -1,5 +1,6 @@
 package com.unla.grupo21.sci.services.impl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -117,5 +118,30 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
 		usuario.setRol(rol);
 	}
 
+	public int traerTotalClientes() {
+		List<Usuario> usuarios= usuarioRepository.findAll();
+		List<Usuario> clientes= new ArrayList<>();
+		
+		for (Usuario usuario : usuarios) {
+			if(usuario.getRol().getRol().equals("ROLE_CLIENTE")) {
+				clientes.add(usuario);
+			}
+		}
+		
+		return clientes.size(); 
+	}
+	
+	public int traerTotalAdmins() {
+		List<Usuario> usuarios= usuarioRepository.findAll();
+		List<Usuario> admins= new ArrayList<>();
+		
+		for (Usuario usuario : usuarios) {
+			if(usuario.getRol().getRol().equals("ROLE_ADMINISTRADOR")) {
+				admins.add(usuario);
+			}
+		}
+		
+		return admins.size();
+	}
 	
 }

@@ -1,19 +1,21 @@
 package com.unla.grupo21.sci.services.impl;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import com.unla.grupo21.sci.dtos.ArticuloDiasDto;
 import com.unla.grupo21.sci.dtos.ArticuloDto;
 import com.unla.grupo21.sci.entities.Articulo;
 import com.unla.grupo21.sci.exceptions.NoEncontradoException;
 import com.unla.grupo21.sci.exceptions.YaExisteException;
 import com.unla.grupo21.sci.repositories.IArticuloRepository;
 import com.unla.grupo21.sci.services.IArticuloService;
-import com.unla.grupo21.sci.services.ILoteArticuloService;
 
 import jakarta.transaction.Transactional;
 
@@ -71,6 +73,22 @@ public class ArticuloService implements IArticuloService {
 		traerArticulo(articulo.getIdArticulo());
 		articulo.setActivo(false);
 		return articuloRepository.save(articulo);
+	}
+	
+	@Override
+	public List<ArticuloDiasDto> traerArtculosConMasDias(int dias){
+		List<Articulo> listaArticulo= articuloRepository.findAll();
+		List<ArticuloDiasDto> listaArticuloMasViejos= new ArrayList<>();
+
+		for (Articulo articulo : listaArticulo) {
+			//devuelve la cantidad de dias de vida del Articulo 
+			long diasArticulo= ChronoUnit.DAYS.between(articulo.getFechaCreacion(), LocalDateTime.now());
+			if(diasArticulo >= dias) {
+				listaArticuloMasViejos.add(ArticuloDiasDto.builder().nombreArticulo(articulo.getDescripcion()).dias(diasArticulo).build());
+			}
+		}
+		
+		return listaArticuloMasViejos;
 	}
 
 }

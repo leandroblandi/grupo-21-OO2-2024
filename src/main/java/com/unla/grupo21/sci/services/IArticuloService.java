@@ -2,6 +2,7 @@ package com.unla.grupo21.sci.services;
 
 import java.util.List;
 
+import com.unla.grupo21.sci.dtos.ArticuloDiasDto;
 import com.unla.grupo21.sci.dtos.ArticuloDto;
 import com.unla.grupo21.sci.entities.Articulo;
 import com.unla.grupo21.sci.exceptions.NoEncontradoException;
@@ -55,4 +56,6 @@ public interface IArticuloService {
 	 * @throws NoEncontradoException si el articulo a eliminar no existe
 	 */
 	public Articulo borrarArticulo(Articulo articulo);
+	
+	public List<ArticuloDiasDto> traerArtculosConMasDias(int dias);
 }

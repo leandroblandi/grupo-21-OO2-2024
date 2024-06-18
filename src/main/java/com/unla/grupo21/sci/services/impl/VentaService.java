@@ -137,4 +137,9 @@ public class VentaService implements IVentaService {
 		return ventasUsuario;
 	}
 
+	@Override
+	public int traerTotalVentas() {
+		return ventaRepository.findAll().size();
+	}
+
 }

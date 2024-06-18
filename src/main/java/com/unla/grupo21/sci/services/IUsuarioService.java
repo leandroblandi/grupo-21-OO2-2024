@@ -33,5 +33,9 @@ public interface IUsuarioService {
 	 * @return El usuario registrado con su ID
 	 */
 	public Usuario registrarUsuario(UsuarioDto usuarioDto, boolean administrador);
+	
+	public int traerTotalClientes();
+	
+	public int traerTotalAdmins();
 
 }
