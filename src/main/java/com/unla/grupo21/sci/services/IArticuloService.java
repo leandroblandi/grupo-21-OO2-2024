@@ -57,5 +57,5 @@ public interface IArticuloService {
 	 */
 	public Articulo borrarArticulo(Articulo articulo);
 	
-	public List<ArticuloDiasDto> traerArtculosConMasDias(int dias);
+	public List<ArticuloDiasDto> traerArticulosConMasDias(int dias);
 }

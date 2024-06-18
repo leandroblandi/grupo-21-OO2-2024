@@ -76,7 +76,7 @@ public class ArticuloService implements IArticuloService {
 	}
 	
 	@Override
-	public List<ArticuloDiasDto> traerArtculosConMasDias(int dias){
+	public List<ArticuloDiasDto> traerArticulosConMasDias(int dias){
 		List<Articulo> listaArticulo= articuloRepository.findAll();
 		List<ArticuloDiasDto> listaArticuloMasViejos= new ArrayList<>();
 

@@ -43,8 +43,8 @@ public class InformeController {
 	}
 	
 	@GetMapping("/informes/articulos/tiempo/{dias}")
-	public ResponseEntity<List<ArticuloDiasDto>> traerArtculosConMasDias(@PathVariable int dias){
-		List<ArticuloDiasDto> list= articuloService.traerArtculosConMasDias(dias);
+	public ResponseEntity<List<ArticuloDiasDto>> traerArticulosConMasDias(@PathVariable int dias){
+		List<ArticuloDiasDto> list= articuloService.traerArticulosConMasDias(dias);
 		return ResponseEntity.ok(list);
 	}
 	
