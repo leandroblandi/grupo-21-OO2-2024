@@ -50,7 +50,7 @@ public class VentaController {
 		return ResponseEntity.ok(venta);
 	}
 	
-	@GetMapping("/ventas/usuario/{idUsuario}")
+	@GetMapping("/ventas/usuario/{usuario}")
 	public ResponseEntity<List<Venta>> traerVentasPorUsuario(@PathVariable String usuario){
 		List<Venta> venta = service.traerVentasPorUsuario(usuario);
 		return ResponseEntity.ok(venta);
