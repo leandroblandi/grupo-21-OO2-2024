@@ -51,8 +51,8 @@ public class VentaController {
 	}
 	
 	@GetMapping("/ventas/usuario/{idUsuario}")
-	public ResponseEntity<List<Venta>> traerVentasPorUsuario(@PathVariable Long idUsuario){
-		List<Venta> venta = service.traerVentasPorUsuario(idUsuario);
+	public ResponseEntity<List<Venta>> traerVentasPorUsuario(@PathVariable String usuario){
+		List<Venta> venta = service.traerVentasPorUsuario(usuario);
 		return ResponseEntity.ok(venta);
 	}
 

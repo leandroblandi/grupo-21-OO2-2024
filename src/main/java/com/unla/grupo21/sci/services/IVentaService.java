@@ -40,5 +40,5 @@ public interface IVentaService {
 	
 	public List<ArticuloCantidadDto> traerArticulosMasVendidos();
 	
-	public List<Venta> traerVentasPorUsuario(Long idUsuario);
+	public List<Venta> traerVentasPorUsuario(String usuario);
 }

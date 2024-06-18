@@ -131,8 +131,8 @@ public class VentaService implements IVentaService {
 	}
 
 	@Override
-	public List<Venta> traerVentasPorUsuario(Long idUsuario) {
-		Usuario usuarioDB = usuarioService.traerUsuario(idUsuario);
+	public List<Venta> traerVentasPorUsuario(String usuario) {
+		Usuario usuarioDB = usuarioService.traerUsuario(usuario);
 		List<Venta> ventasUsuario = ventaRepository.findByUsuario(usuarioDB);
 		return ventasUsuario;
 	}
