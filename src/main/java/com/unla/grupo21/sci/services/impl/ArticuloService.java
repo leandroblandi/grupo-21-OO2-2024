@@ -19,14 +19,9 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class ArticuloService implements IArticuloService {
-	private static int CANTIDAD_DEFECTO_LOTE = 50;
 	
 	@Autowired
 	private IArticuloRepository articuloRepository;
-
-	@Autowired
-	@Lazy
-	private ILoteArticuloService loteService;
 
 	@Override
 	public List<Articulo> traerArticulos() {
@@ -55,7 +50,6 @@ public class ArticuloService implements IArticuloService {
 		}
 		articulo.setEstaEnUnLote(false);
 		Articulo articuloDb = articuloRepository.save(articulo);
-		loteService.generarAltaLote(articuloDb.getIdArticulo(), CANTIDAD_DEFECTO_LOTE, "Default supplier SA", articuloDb.getCosto());
 
 		return articuloDb;
 	}
