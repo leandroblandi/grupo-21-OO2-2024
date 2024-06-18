@@ -34,15 +34,15 @@ WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`usuarios` WHERE `id_usuario` = '4');
 -- INSERTs de articulos
 
 INSERT INTO `tpc-oo2`.`articulos` (`id_articulo`, `activo`, `costo`, `descripcion`, `fecha_actualizacion`, `fecha_creacion`, `precio_venta`, `esta_en_un_lote`)
-SELECT '1', 1, '1100.00', 'IPhone 15 Pro Max 512GB Dark Ocean', '2024-06-14 15:31:53.962542', '2024-06-14 15:31:53.962542', '1700.00', false
+SELECT '1', 1, '1100.00', 'IPhone 15 Pro Max 512GB Dark Ocean', '2024-06-14 15:31:53.962542', '2024-06-14 15:31:53.962542', '1700.00', true
 WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`articulos` WHERE `id_articulo` = '1');
 
 INSERT INTO `tpc-oo2`.`articulos` (`id_articulo`, `activo`, `costo`, `descripcion`, `fecha_actualizacion`, `fecha_creacion`, `precio_venta`, `esta_en_un_lote`)
-SELECT '2', 1, '950.00', 'IPhone 14 Pro Max', '2024-06-14 15:31:53.962542', '2024-06-14 15:31:53.962542', '1300.00', false
+SELECT '2', 1, '950.00', 'IPhone 14 Pro Max', '2024-06-14 15:31:53.962542', '2024-06-14 15:31:53.962542', '1300.00', true
 WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`articulos` WHERE `id_articulo` = '2');
 
 INSERT INTO `tpc-oo2`.`articulos` (`id_articulo`, `activo`, `costo`, `descripcion`, `fecha_actualizacion`, `fecha_creacion`, `precio_venta`, `esta_en_un_lote`)
-SELECT '3', 1, '1200.00', 'Play Station PS5 2TB + GTA VI', '2024-06-14 15:31:53.962542', '2024-06-14 15:31:53.962542', '2100.00', false
+SELECT '3', 1, '1200.00', 'Play Station PS5 2TB + GTA VI', '2024-06-14 15:31:53.962542', '2024-06-14 15:31:53.962542', '2100.00', true
 WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`articulos` WHERE `id_articulo` = '3');
 
 INSERT INTO `tpc-oo2`.`articulos` (`id_articulo`, `activo`, `costo`, `descripcion`, `fecha_actualizacion`, `fecha_creacion`, `precio_venta`, `esta_en_un_lote`)
