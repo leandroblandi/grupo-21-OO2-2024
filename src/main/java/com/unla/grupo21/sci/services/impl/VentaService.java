@@ -38,9 +38,9 @@ public class VentaService implements IVentaService {
 
 	@Autowired
 	private ILoteArticuloService loteService;
-	
+
 	@Autowired
-    private IItemVentaRepository itemVentaRepository;
+	private IItemVentaRepository itemVentaRepository;
 
 	@Override
 	public List<Venta> traerVentas() {
@@ -98,8 +98,7 @@ public class VentaService implements IVentaService {
 	}
 
 	/**
-	 * Recorre las entidades ItemVenta, y realiza la suma total de
-	 * los subtotales
+	 * Recorre las entidades ItemVenta, y realiza la suma total de los subtotales
 	 * 
 	 * @param itemsVenta La lista de objetos ItemVenta
 	 * @return El precio total de todos los items de la venta
@@ -113,8 +112,8 @@ public class VentaService implements IVentaService {
 	}
 
 	/**
-	 * Metodo auxiliar para recorrer cada item, y restarle la cantidad
-	 * al lote correspondiente en el sistema.
+	 * Metodo auxiliar para recorrer cada item, y restarle la cantidad al lote
+	 * correspondiente en el sistema.
 	 * 
 	 * @param items La lista de objetos ItemVenta
 	 */
@@ -123,13 +122,19 @@ public class VentaService implements IVentaService {
 			loteService.actualizarCantidadEnLote(item.getArticulo(), item.getCantidad());
 		}
 	}
-	
+
 	@Override
-    public List<ArticuloCantidadDto> traerArticulosMasVendidos() {
-    	 List<Object[]> results = itemVentaRepository.traerArticulosMasVendidos();
-         return results.stream()
-                 .map(result -> ArticuloCantidadDto.builder().articulo((Articulo)result[0]).cantidad((Long)result[1]).build())
-                 .collect(Collectors.toList());
-    }
+	public List<ArticuloCantidadDto> traerArticulosMasVendidos() {
+		List<Object[]> results = itemVentaRepository.traerArticulosMasVendidos();
+		return results.stream().map(result -> ArticuloCantidadDto.builder().articulo((Articulo) result[0])
+				.cantidad((Long) result[1]).build()).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Venta> traerVentasPorUsuario(Long idUsuario) {
+		Usuario usuarioDB = usuarioService.traerUsuario(idUsuario);
+		List<Venta> ventasUsuario = ventaRepository.findByUsuario(usuarioDB);
+		return ventasUsuario;
+	}
 
 }

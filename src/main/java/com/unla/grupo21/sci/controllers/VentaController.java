@@ -49,5 +49,11 @@ public class VentaController {
 		Venta venta = service.generarVenta(usuario, ventaDto.getItems());
 		return ResponseEntity.ok(venta);
 	}
+	
+	@GetMapping("/ventas/usuario/{idUsuario}")
+	public ResponseEntity<List<Venta>> traerVentasPorUsuario(@PathVariable Long idUsuario){
+		List<Venta> venta = service.traerVentasPorUsuario(idUsuario);
+		return ResponseEntity.ok(venta);
+	}
 
 }

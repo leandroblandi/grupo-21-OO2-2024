@@ -39,4 +39,6 @@ public interface IVentaService {
 	public Venta generarVenta(Usuario usuario, List<ItemVentaDto> itemsDto);
 	
 	public List<ArticuloCantidadDto> traerArticulosMasVendidos();
+	
+	public List<Venta> traerVentasPorUsuario(Long idUsuario);
 }
