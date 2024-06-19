@@ -1,8 +1,5 @@
--- DELETEs de las tablas, para insertar datos
--- DELETE FROM `tpc-oo2`.`lote_articulos`;
--- DELETE FROM `tpc-oo2`.`articulos`;
--- DELETE FROM `tpc-oo2`.`usuarios`;
--- DELETE FROM `tpc-oo2`.`roles`;
+-- Inicia la transacción
+START TRANSACTION;
 
 -- INSERTs de roles
 
@@ -50,12 +47,26 @@ SELECT '4', 1, '850.00', 'Samsung S24 Ultra 1TB', '2024-06-14 15:31:53.962542', 
 WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`articulos` WHERE `id_articulo` = '4');
 
 INSERT INTO `tpc-oo2`.`articulos` (`id_articulo`, `activo`, `costo`, `descripcion`, `fecha_actualizacion`, `fecha_creacion`, `precio_venta`, `esta_en_un_lote`)
-SELECT '5', 1, '34.50', 'Redragon Kumara K552', '2024-06-14 15:31:53.962542', '2024-06-14 15:31:53.962542', '56.00', false
+SELECT '5', 0, '34.50', 'Redragon Kumara K552', '2024-06-14 15:31:53.962542', '2024-06-14 15:31:53.962542', '56.00', false
 WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`articulos` WHERE `id_articulo` = '5');
 
 INSERT INTO `tpc-oo2`.`articulos` (`id_articulo`, `activo`, `costo`, `descripcion`, `fecha_actualizacion`, `fecha_creacion`, `precio_venta`, `esta_en_un_lote`)
 SELECT '6', 1, '55.50', 'Redragon Fizz Pro K631', '2024-06-14 15:31:53.962542', '2024-06-14 15:31:53.962542', '70.00', false
 WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`articulos` WHERE `id_articulo` = '6');
+
+INSERT INTO `tpc-oo2`.`articulos` (`id_articulo`, `activo`, `costo`, `descripcion`, `fecha_actualizacion`, `fecha_creacion`, `precio_venta`, `esta_en_un_lote`)
+SELECT '7', 1, '3500.50', 'Smart TV Led 50 UHD Samsung', '2024-06-14 15:31:53.962542', '2024-06-14 15:31:53.962542', '3800.00', false
+WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`articulos` WHERE `id_articulo` = '7');
+
+INSERT INTO `tpc-oo2`.`articulos` (`id_articulo`, `activo`, `costo`, `descripcion`, `fecha_actualizacion`, `fecha_creacion`, `precio_venta`, `esta_en_un_lote`)
+SELECT '8', 1, '700.50', 'Auriculares Logitech G733 inalámbricos RGB', '2024-06-14 15:31:53.962542', '2024-01-14 15:31:53.962542', '1800.00', false
+WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`articulos` WHERE `id_articulo` = '8');
+
+INSERT INTO `tpc-oo2`.`articulos` (`id_articulo`, `activo`, `costo`, `descripcion`, `fecha_actualizacion`, `fecha_creacion`, `precio_venta`, `esta_en_un_lote`)
+SELECT '9', 1, '3000.50', 'iPad Apple 10th generation 2022', '2024-06-14 15:31:53.962542', '2023-06-14 15:31:53.962542', '4200.00', false
+WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`articulos` WHERE `id_articulo` = '9');
+
+
 
 -- INSERTs de lote_articulos
 
@@ -71,39 +82,92 @@ INSERT INTO `tpc-oo2`.`lote_articulos` (`id_lote`, `cantidad`, `fecha_actualizac
 SELECT '3', '200', '2024-06-14 15:31:53.962542', '2024-06-14 15:31:53.962542', '2024-06-14 15:31:53.962542', '24000.00', 'Gamers Store Latam', '3'
 WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`lote_articulos` WHERE `id_lote` = '3');
 
--- INSERTs de item_venta
+-- Verifica e inserta en items_venta
+INSERT INTO items_venta (id_item, articulo_id_articulo, fecha_creacion, fecha_actualizacion, subtotal, cantidad)
+SELECT 4, 1, '2024-06-18 21:57:29.271988', '2024-06-18 21:57:29.271988', 1700, 1
+WHERE NOT EXISTS (SELECT 1 FROM items_venta WHERE id_item = 4);
 
-INSERT INTO `tpc-oo2`.`items_venta` (`id_item`, `cantidad`, `subtotal`, `articulo_id_articulo`)
-SELECT '1', '13', '5000.00', '1'
-WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`items_venta` WHERE `id_item` = '1');
+INSERT INTO items_venta (id_item, articulo_id_articulo, fecha_creacion, fecha_actualizacion, subtotal, cantidad)
+SELECT 5, 1, '2024-06-18 21:57:29.274000', '2024-06-18 21:57:29.274000', 1300, 2
+WHERE NOT EXISTS (SELECT 1 FROM items_venta WHERE id_item = 5);
 
-INSERT INTO `tpc-oo2`.`items_venta` (`id_item`, `cantidad`, `subtotal`, `articulo_id_articulo`)
-SELECT '2', '70', '9000.00', '3'
-WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`items_venta` WHERE `id_item` = '2');
+INSERT INTO items_venta (id_item, articulo_id_articulo, fecha_creacion, fecha_actualizacion, subtotal, cantidad)
+SELECT 6, 1, '2024-06-18 21:57:29.275000', '2024-06-18 21:57:29.275000', 2100, 3
+WHERE NOT EXISTS (SELECT 1 FROM items_venta WHERE id_item = 6);
 
-INSERT INTO `tpc-oo2`.`items_venta` (`id_item`, `cantidad`, `subtotal`, `articulo_id_articulo`)
-SELECT '3', '21', '2500.00', '2'
-WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`items_venta` WHERE `id_item` = '3');
+INSERT INTO items_venta (id_item, articulo_id_articulo, fecha_creacion, fecha_actualizacion, subtotal, cantidad)
+SELECT 7, 1, '2024-06-18 21:57:48.562457', '2024-06-18 21:57:48.562457', 1700, 1
+WHERE NOT EXISTS (SELECT 1 FROM items_venta WHERE id_item = 7);
 
+INSERT INTO items_venta (id_item, articulo_id_articulo, fecha_creacion, fecha_actualizacion, subtotal, cantidad)
+SELECT 8, 4, '2024-06-18 21:57:48.563460', '2024-06-18 21:57:48.563460', 5200, 2
+WHERE NOT EXISTS (SELECT 1 FROM items_venta WHERE id_item = 8);
 
--- INSERTs de venta
+INSERT INTO items_venta (id_item, articulo_id_articulo, fecha_creacion, fecha_actualizacion, subtotal, cantidad)
+SELECT 9, 3, '2024-06-18 21:57:48.565972', '2024-06-18 21:57:48.565972', 6300, 3
+WHERE NOT EXISTS (SELECT 1 FROM items_venta WHERE id_item = 9);
 
-INSERT INTO `tpc-oo2`.`ventas` (`id_venta`, `fecha_venta`, `precio_final`, `usuario_id_usuario`)
-SELECT '1', '2024-01-01', '20000.00', '2'
-WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`ventas` WHERE `id_venta` = '1');
+INSERT INTO items_venta (id_item, articulo_id_articulo, fecha_creacion, fecha_actualizacion, subtotal, cantidad)
+SELECT 10, 1, '2024-06-18 21:57:54.620021', '2024-06-18 21:57:54.620021', 1700, 1
+WHERE NOT EXISTS (SELECT 1 FROM items_venta WHERE id_item = 10);
 
+INSERT INTO items_venta (id_item, articulo_id_articulo, fecha_creacion, fecha_actualizacion, subtotal, cantidad)
+SELECT 11, 1, '2024-06-18 21:58:01.883182', '2024-06-18 21:58:01.883182', 1700, 1
+WHERE NOT EXISTS (SELECT 1 FROM items_venta WHERE id_item = 11);
 
--- INSERTs de venta_item
+INSERT INTO items_venta (id_item, articulo_id_articulo, fecha_creacion, fecha_actualizacion, subtotal, cantidad)
+SELECT 12, 1, '2024-06-18 21:58:20.693179', '2024-06-18 21:58:20.693179', 1300, 2
+WHERE NOT EXISTS (SELECT 1 FROM items_venta WHERE id_item = 12);
 
-INSERT INTO `tpc-oo2`.`ventas_items` (`venta_id_venta`, `items_id_item`)
-SELECT '1', '1'
-WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`ventas_items` WHERE `venta_id_venta` = '1' AND `items_id_item` = '1');
+-- Verifica e inserta en ventas
+INSERT INTO ventas (id_venta, fecha_creacion, fecha_actualizacion, fecha_venta, precio_final, usuario_id_usuario)
+SELECT 5, '2024-06-18 21:57:29.257448', '2024-06-18 21:57:29.257448', '2024-06-18', 5100, 1
+WHERE NOT EXISTS (SELECT 1 FROM ventas WHERE id_venta = 5);
 
-INSERT INTO `tpc-oo2`.`ventas_items` (`venta_id_venta`, `items_id_item`)
-SELECT '1', '2'
-WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`ventas_items` WHERE `venta_id_venta` = '1' AND `items_id_item` = '2');
+INSERT INTO ventas (id_venta, fecha_creacion, fecha_actualizacion, fecha_venta, precio_final, usuario_id_usuario)
+SELECT 6, '2024-06-18 21:57:48.559933', '2024-06-18 21:57:48.559933', '2024-06-18', 13200, 3
+WHERE NOT EXISTS (SELECT 1 FROM ventas WHERE id_venta = 6);
 
-INSERT INTO `tpc-oo2`.`ventas_items` (`venta_id_venta`, `items_id_item`)
-SELECT '1', '3'
-WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`ventas_items` WHERE `venta_id_venta` = '1' AND `items_id_item` = '3');
+INSERT INTO ventas (id_venta, fecha_creacion, fecha_actualizacion, fecha_venta, precio_final, usuario_id_usuario)
+SELECT 7, '2024-06-18 21:57:54.618015', '2024-06-18 21:57:54.618015', '2024-06-18', 1700, 3
+WHERE NOT EXISTS (SELECT 1 FROM ventas WHERE id_venta = 7);
+
+INSERT INTO ventas (id_venta, fecha_creacion, fecha_actualizacion, fecha_venta, precio_final, usuario_id_usuario)
+SELECT 8, '2024-06-18 21:58:01.880665', '2024-06-18 21:58:01.880665', '2024-06-18', 1700, 1
+WHERE NOT EXISTS (SELECT 1 FROM ventas WHERE id_venta = 8);
+
+INSERT INTO ventas (id_venta, fecha_creacion, fecha_actualizacion, fecha_venta, precio_final, usuario_id_usuario)
+SELECT 9, '2024-06-18 21:58:20.691504', '2024-06-18 21:58:20.691504', '2024-06-18', 1300, 4
+WHERE NOT EXISTS (SELECT 1 FROM ventas WHERE id_venta = 9);
+
+-- Verifica e inserta en ventas_items
+INSERT INTO ventas_items (venta_id_venta, items_id_item)
+SELECT 5, 4 WHERE NOT EXISTS (SELECT 1 FROM ventas_items WHERE venta_id_venta = 5 AND items_id_item = 4);
+
+INSERT INTO ventas_items (venta_id_venta, items_id_item)
+SELECT 5, 5 WHERE NOT EXISTS (SELECT 1 FROM ventas_items WHERE venta_id_venta = 5 AND items_id_item = 5);
+
+INSERT INTO ventas_items (venta_id_venta, items_id_item)
+SELECT 5, 6 WHERE NOT EXISTS (SELECT 1 FROM ventas_items WHERE venta_id_venta = 5 AND items_id_item = 6);
+
+INSERT INTO ventas_items (venta_id_venta, items_id_item)
+SELECT 6, 7 WHERE NOT EXISTS (SELECT 1 FROM ventas_items WHERE venta_id_venta = 6 AND items_id_item = 7);
+
+INSERT INTO ventas_items (venta_id_venta, items_id_item)
+SELECT 6, 8 WHERE NOT EXISTS (SELECT 1 FROM ventas_items WHERE venta_id_venta = 6 AND items_id_item = 8);
+
+INSERT INTO ventas_items (venta_id_venta, items_id_item)
+SELECT 6, 9 WHERE NOT EXISTS (SELECT 1 FROM ventas_items WHERE venta_id_venta = 6 AND items_id_item = 9);
+
+INSERT INTO ventas_items (venta_id_venta, items_id_item)
+SELECT 7, 10 WHERE NOT EXISTS (SELECT 1 FROM ventas_items WHERE venta_id_venta = 7 AND items_id_item = 10);
+
+INSERT INTO ventas_items (venta_id_venta, items_id_item)
+SELECT 8, 11 WHERE NOT EXISTS (SELECT 1 FROM ventas_items WHERE venta_id_venta = 8 AND items_id_item = 11);
+
+INSERT INTO ventas_items (venta_id_venta, items_id_item)
+SELECT 9, 12 WHERE NOT EXISTS (SELECT 1 FROM ventas_items WHERE venta_id_venta = 9 AND items_id_item = 12);
+
+-- Commit de la transacción
+COMMIT;
 
