@@ -26,7 +26,7 @@ El Backend está realizado con una arquitectura REST. El mismo expone endpoints,
 5. Si todo va bien, verá en el recuadro Projects, verás el `pom.xml` importado correctamente con el nombre `com.unla.grupo21:tpc-oo2-sci:0.0.1-SNAPSHOT.jar`, lo dejas seleccionado.
 6. Finish.
 
-####1.1 Ejecución de script SQL
+#### 1.1 Ejecución de script SQL
 **Muy importante.** Antes de levantar el servidor y ejecutar la aplicación por primera vez, es muy importante que crees un esquema llamado 'tpc-oo2'. Si no sabes como hacerlo, puedes abrir ejecutar el siguiente comando SQL:
 ```sql
 CREATE SCHEMA `tpc-oo2`;
