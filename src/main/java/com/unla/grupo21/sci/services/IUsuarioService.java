@@ -38,4 +38,5 @@ public interface IUsuarioService {
 	
 	public int traerTotalAdmins();
 
+	public Usuario eliminarUsuario(long idUsuario);
 }

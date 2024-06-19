@@ -143,5 +143,12 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
 		
 		return admins.size();
 	}
+
+	@Override
+	public Usuario eliminarUsuario(long idUsuario) {
+		Usuario usuario = traerUsuario(idUsuario);
+		usuario.setActivo(false);
+		return usuarioRepository.save(usuario);
+	}
 	
 }
