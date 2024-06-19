@@ -21,12 +21,16 @@ SELECT '2', 1, 'User', '$2a$10$RH3.vBfUE0BRRGNgHjNlCedEhxC67oMQWPUOEEG4w3mFpgW.I
 WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`usuarios` WHERE `id_usuario` = '2');
 
 INSERT INTO `tpc-oo2`.`usuarios` (`id_usuario`, `activo`, `apellido`, `clave`, `dni`, `nombre`, `usuario`, `rol_rol_id`)
-SELECT '3', 1, 'Sanchez', '$2a$10$RH3.vBfUE0BRRGNgHjNlCedEhxC67oMQWPUOEEG4w3mFpgW.IE8ve', '32075398', 'Fabian', 'fsanchez', 2
+SELECT '3', 1, 'Ceballos', '$2a$10$RH3.vBfUE0BRRGNgHjNlCedEhxC67oMQWPUOEEG4w3mFpgW.IE8ve', '32075398', 'Agustin', 'aceballos', 2
 WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`usuarios` WHERE `id_usuario` = '3');
 
 INSERT INTO `tpc-oo2`.`usuarios` (`id_usuario`, `activo`, `apellido`, `clave`, `dni`, `nombre`, `usuario`, `rol_rol_id`)
-SELECT '4', 1, 'Rodriguez', '$2a$10$RH3.vBfUE0BRRGNgHjNlCedEhxC67oMQWPUOEEG4w3mFpgW.IE8ve', '11938279', 'Alberto', 'arodriguez', 2
+SELECT '4', 1, 'Carreira', '$2a$10$RH3.vBfUE0BRRGNgHjNlCedEhxC67oMQWPUOEEG4w3mFpgW.IE8ve', '11938279', 'Marco', 'mcarreira', 2
 WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`usuarios` WHERE `id_usuario` = '4');
+
+INSERT INTO `tpc-oo2`.`usuarios` (`id_usuario`, `activo`, `apellido`, `clave`, `dni`, `nombre`, `usuario`, `rol_rol_id`)
+SELECT '5', 1, 'Brites', '$2a$10$RH3.vBfUE0BRRGNgHjNlCedEhxC67oMQWPUOEEG4w3mFpgW.IE8ve', '11938279', 'Alejo', 'abrites', 2
+WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`usuarios` WHERE `id_usuario` = '5');
 
 -- INSERTs de articulos
 
