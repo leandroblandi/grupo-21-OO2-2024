@@ -59,11 +59,11 @@ SELECT '7', 1, '3500.50', 'Smart TV Led 50 UHD Samsung', '2024-06-14 15:31:53.96
 WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`articulos` WHERE `id_articulo` = '7');
 
 INSERT INTO `tpc-oo2`.`articulos` (`id_articulo`, `activo`, `costo`, `descripcion`, `fecha_actualizacion`, `fecha_creacion`, `precio_venta`, `esta_en_un_lote`)
-SELECT '8', 1, '700.50', 'Auriculares Logitech G733 inalámbricos RGB', '2024-06-14 15:31:53.962542', '2024-06-14 15:31:53.962542', '1800.00', false
+SELECT '8', 1, '700.50', 'Auriculares Logitech G733 inalámbricos RGB', '2024-06-14 15:31:53.962542', '2024-01-14 15:31:53.962542', '1800.00', false
 WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`articulos` WHERE `id_articulo` = '8');
 
 INSERT INTO `tpc-oo2`.`articulos` (`id_articulo`, `activo`, `costo`, `descripcion`, `fecha_actualizacion`, `fecha_creacion`, `precio_venta`, `esta_en_un_lote`)
-SELECT '9', 1, '3000.50', 'iPad Apple 10th generation 2022', '2024-06-14 15:31:53.962542', '2024-06-14 15:31:53.962542', '4200.00', false
+SELECT '9', 1, '3000.50', 'iPad Apple 10th generation 2022', '2024-06-14 15:31:53.962542', '2023-06-14 15:31:53.962542', '4200.00', false
 WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`articulos` WHERE `id_articulo` = '9');
 
 
