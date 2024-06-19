@@ -25,13 +25,23 @@ El Backend está realizado con una arquitectura REST. El mismo expone endpoints,
 4. Por ultimo, presionas el botón Browse, y buscas la carpeta donde clonaste el repositorio
 5. Si todo va bien, verá en el recuadro Projects, verás el `pom.xml` importado correctamente con el nombre `com.unla.grupo21:tpc-oo2-sci:0.0.1-SNAPSHOT.jar`, lo dejas seleccionado.
 6. Finish.
-#### 2. Levantando el servidor por primera vez
+
+#### 1.1 Ejecución de script SQL
+**Muy importante.** Antes de levantar el servidor y ejecutar la aplicación por primera vez, es muy importante que crees un esquema llamado 'tpc-oo2'. Si no sabes como hacerlo, puedes abrir ejecutar el siguiente comando SQL:
+```sql
+CREATE SCHEMA `tpc-oo2`;
+```
+De esa forma, se ejecutará el archivo `data.sql` al levantar el proyecto, eso incluirá algunos registros iniciales para poder utilizar la aplicación sin problemas.
+
+### 2. Levantando el servidor por primera vez
 El servidor se iniciará en el puerto `8080`, por lo cual, asegúrate de tener libre ese puerto, o que no haya otro servidor Tomcat corriendo en el mismo puerto.
 Para iniciar el servidor, puedes hacer click derecho sobre el proyecto en el Package Explorer, y seleccionar la opción:
-    1. "Run As"
+	1. "Run As"
     2. Luego, "Spring Boot App".
+
 ### 3. Utilizando la aplicación
 Una vez iniciaste la aplicación, Spring inicializará todo lo necesario, incluyendo la creación de las tablas, y algunos datos iniciales como para que puedas usar la aplicación normalmente.
+
 #### 3.1. Probando la aplicación
 El punto de partida de la aplicación, como para probar que funciona, puede ser el siguiente endpoint:
 ```bash
@@ -40,11 +50,11 @@ GET: http://localhost:8080/api/test
 El mismo debería responder con un JSON como:
 ``` json
 {
- "status": "on",
- "message": "sci works!"
+ "date": "2024-06-19T13:11:25.229",
+ "details": "La API está funcionando correctamente"
 }
 ```
-Eso significa que la aplicación está corriendo de manera exitosa. El verdadero punto de partida es el login, es decir, el inicio de sesión. El usuario por defecto con los permisos suficientes tiene como username "dummy", y la contraseña es "1234", tal como verás en el siguiente JSON:
+**Eso significa que la aplicación está corriendo de manera exitosa.** El verdadero punto de partida es el login, es decir, el inicio de sesión. El usuario por defecto con los permisos suficientes tiene como username "dummy", y la contraseña es "1234", tal como verás en el siguiente JSON:
 ``` json
 {
  "usuario": "dummy",
@@ -54,7 +64,7 @@ Eso significa que la aplicación está corriendo de manera exitosa. El verdadero
 Si deseas un usuario que solo tenga permisos de cliente, puedes usar el siguiente:
 ``` json
 {
- "usuario": "lblandi",
+ "usuario": "mcarreira",
  "clave": "1234"
 }
 ```
@@ -63,28 +73,29 @@ Si deseas un usuario que solo tenga permisos de cliente, puedes usar el siguient
 La aplicación maneja un uso de roles, donde cada usuario puede tener solo un rol. Los roles cargados en el sistema son:
 - `ROLE_CLIENTE`: Es el rol que cualquier usuario obtiene al registrarse en la aplicación.
 - `ROLE_ADMINISTRADOR`: Unicamente los adminsitradores tienen este rol.
+
 #### 3.1.2 Permisos según roles
 Cabe aclarar que los endpoints están restringidos según rol. Es decir, un cliente no puede hacer todo lo que el administrador sí puede. Aquí se lista las cosas que un visitante puede hacer:
 - Testear el backend
 - Registrarse
 - Iniciar sesión
 
-Sin embargo, si el visitante se registra e inicia sesión, obtendrá el rol `ROLE_CLIENTE`, por lo que podrá hacer lo siguiente:
+**Sin embargo, si el visitante se registra e inicia sesión, obtendrá el rol `ROLE_CLIENTE`, por lo que podrá hacer lo siguiente:**
 - Ver los artículos
 - Realizar una compra de uno/varios artículos
+- Ver las compras realizadas
 
-Por último, el usuario con rol `ROLE_ADMINISTRADOR` puede hacer lo siguiente:
-- Sección artículos
+**Por último, el usuario con rol `ROLE_ADMINISTRADOR` puede hacer lo siguiente:**
+- **Sección artículos**
     - Ver artículos
     - Cargar artículos
     - Modificar artículos
     - Eliminar artículos
-- Sección lotes:
+- **Sección lotes:**
     - Ver lotes
     - Cargar lotes
-    - Modificar lotes
+    - Aprovisionar lotes
     - Eliminar lotes
-- Sección usuarios:
+- **Sección usuarios:**
     - Ver clientes
     - Eliminar clientes
-    - Crear administradores
