@@ -11,12 +11,8 @@ import com.unla.grupo21.sci.entities.ItemVenta;
 @Repository
 public interface IItemVentaRepository extends JpaRepository<ItemVenta, Long> {
 
-	
-	
-	@Query("SELECT iv.articulo, SUM(iv.cantidad) as totalCantidad " +
-	           "FROM ItemVenta iv " +
-	           "GROUP BY iv.articulo " +
-	           "ORDER BY totalCantidad DESC")
-	    List<Object[]> traerArticulosMasVendidos();
-	
+	@Query("SELECT iv.articulo, SUM(iv.cantidad) as totalCantidad " + "FROM ItemVenta iv " + "GROUP BY iv.articulo "
+			+ "ORDER BY totalCantidad DESC")
+	List<Object[]> traerArticulosMasVendidos();
+
 }

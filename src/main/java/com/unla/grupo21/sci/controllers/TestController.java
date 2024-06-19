@@ -16,10 +16,8 @@ import com.unla.grupo21.sci.dtos.ErrorDetailsDto;
 public class TestController {
 	@GetMapping("/status")
 	public ResponseEntity<ErrorDetailsDto> getStatus() {
-		ErrorDetailsDto dto = ErrorDetailsDto.builder()
-				.date(LocalDateTime.now())
-				.details("La API está funcionando correctamente")
-				.build();
+		ErrorDetailsDto dto = ErrorDetailsDto.builder().date(LocalDateTime.now())
+				.details("La API está funcionando correctamente").build();
 		return ResponseEntity.ok(dto);
 	}
 }

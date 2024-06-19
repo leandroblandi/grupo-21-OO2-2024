@@ -8,7 +8,6 @@ import com.unla.grupo21.sci.entities.Usuario;
 import com.unla.grupo21.sci.entities.Venta;
 import com.unla.grupo21.sci.exceptions.NoEncontradoException;
 
-
 public interface IVentaService {
 
 	/**
@@ -37,10 +36,10 @@ public interface IVentaService {
 	 * @return Un objeto Venta con los datos
 	 */
 	public Venta generarVenta(Usuario usuario, List<ItemVentaDto> itemsDto);
-	
+
 	public List<ArticuloCantidadDto> traerArticulosMasVendidos();
-	
+
 	public List<Venta> traerVentasPorUsuario(String usuario);
-	
+
 	public int traerTotalVentas();
 }

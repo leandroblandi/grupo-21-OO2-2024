@@ -10,7 +10,7 @@ import com.unla.grupo21.sci.entities.Venta;
 
 @Repository
 public interface IVentaRepository extends JpaRepository<Venta, Long> {
-	
+
 	public List<Venta> findByUsuario(Usuario usuario);
 
 }

@@ -86,16 +86,16 @@ public class LoteArticuloService implements ILoteArticuloService {
 	@Override
 	public boolean eliminarLote(Long id) {
 		Optional<LoteArticulo> loteOptional = loteArticuloRepository.findById(id);
-		
+
 		if (loteOptional.isEmpty()) {
 			throw new NoEncontradoException(id);
 		}
 		LoteArticulo lote = loteOptional.get();
-		
+
 		// Seteamos en false porque deja de estar en un articulo
-        Articulo articulo = lote.getArticulo();
-        articulo.setEstaEnUnLote(false);
-        
+		Articulo articulo = lote.getArticulo();
+		articulo.setEstaEnUnLote(false);
+
 		try {
 			loteArticuloRepository.delete(lote);
 			return true;

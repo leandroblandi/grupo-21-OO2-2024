@@ -49,9 +49,9 @@ public class VentaController {
 		Venta venta = service.generarVenta(usuario, ventaDto.getItems());
 		return ResponseEntity.ok(venta);
 	}
-	
+
 	@GetMapping("/ventas/usuario/{usuario}")
-	public ResponseEntity<List<Venta>> traerVentasPorUsuario(@PathVariable String usuario){
+	public ResponseEntity<List<Venta>> traerVentasPorUsuario(@PathVariable String usuario) {
 		List<Venta> venta = service.traerVentasPorUsuario(usuario);
 		return ResponseEntity.ok(venta);
 	}

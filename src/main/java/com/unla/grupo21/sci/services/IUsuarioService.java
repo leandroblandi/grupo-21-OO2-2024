@@ -25,17 +25,18 @@ public interface IUsuarioService {
 	public Usuario traerUsuario(long idUsuario);
 
 	public Usuario traerUsuario(String nombreUsuario);
+
 	/**
 	 * Almacena un usuario cliente en la base de datos
 	 * 
-	 * @param usuarioDto El objeto DTO que contiene la info para registrar
+	 * @param usuarioDto    El objeto DTO que contiene la info para registrar
 	 * @param administrador Si el usuario a crear debe ser administrador
 	 * @return El usuario registrado con su ID
 	 */
 	public Usuario registrarUsuario(UsuarioDto usuarioDto, boolean administrador);
-	
+
 	public int traerTotalClientes();
-	
+
 	public int traerTotalAdmins();
 
 	public Usuario eliminarUsuario(long idUsuario);

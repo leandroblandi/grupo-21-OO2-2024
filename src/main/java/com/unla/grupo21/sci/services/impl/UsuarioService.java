@@ -85,7 +85,7 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
 		}
 		return usuarioOptional.get();
 	}
-	
+
 	@Override
 	public Usuario registrarUsuario(UsuarioDto usuarioDto, boolean administrador) {
 		Optional<Usuario> usuarioOptional = usuarioRepository.findByUsuario(usuarioDto.getUsuario());
@@ -119,28 +119,28 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
 	}
 
 	public int traerTotalClientes() {
-		List<Usuario> usuarios= usuarioRepository.findAll();
-		List<Usuario> clientes= new ArrayList<>();
-		
+		List<Usuario> usuarios = usuarioRepository.findAll();
+		List<Usuario> clientes = new ArrayList<>();
+
 		for (Usuario usuario : usuarios) {
-			if(usuario.getRol().getRol().equals("ROLE_CLIENTE")) {
+			if (usuario.getRol().getRol().equals("ROLE_CLIENTE")) {
 				clientes.add(usuario);
 			}
 		}
-		
-		return clientes.size(); 
+
+		return clientes.size();
 	}
-	
+
 	public int traerTotalAdmins() {
-		List<Usuario> usuarios= usuarioRepository.findAll();
-		List<Usuario> admins= new ArrayList<>();
-		
+		List<Usuario> usuarios = usuarioRepository.findAll();
+		List<Usuario> admins = new ArrayList<>();
+
 		for (Usuario usuario : usuarios) {
-			if(usuario.getRol().getRol().equals("ROLE_ADMINISTRADOR")) {
+			if (usuario.getRol().getRol().equals("ROLE_ADMINISTRADOR")) {
 				admins.add(usuario);
 			}
 		}
-		
+
 		return admins.size();
 	}
 
@@ -150,5 +150,5 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
 		usuario.setActivo(false);
 		return usuarioRepository.save(usuario);
 	}
-	
+
 }

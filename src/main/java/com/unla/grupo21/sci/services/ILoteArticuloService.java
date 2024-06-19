@@ -60,6 +60,5 @@ public interface ILoteArticuloService {
 	 */
 	public LoteArticulo aprovisionarLote(Articulo articulo, int cantidadRequerida);
 
-	
 	public boolean eliminarLote(Long id);
 }

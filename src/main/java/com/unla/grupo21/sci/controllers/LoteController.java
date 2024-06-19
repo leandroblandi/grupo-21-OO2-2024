@@ -31,7 +31,7 @@ public class LoteController {
 
 	@Autowired
 	private IArticuloService serviceArticulo;
-	
+
 	@GetMapping("/lotes")
 	public ResponseEntity<List<LoteArticulo>> traerLotes() {
 		List<LoteArticulo> lotes = service.traerLotes();
@@ -50,13 +50,14 @@ public class LoteController {
 				loteDto.getProveedor(), loteDto.getCosto());
 		return ResponseEntity.ok(lote);
 	}
-	
+
 	@PutMapping("/lotes/articulo/{articuloId}")
-	public ResponseEntity<LoteArticulo> provisionarLoteaprovisionarLote(@PathVariable Long articuloId,@RequestParam(required = true) int cantidadRequerida){
+	public ResponseEntity<LoteArticulo> provisionarLoteaprovisionarLote(@PathVariable Long articuloId,
+			@RequestParam(required = true) int cantidadRequerida) {
 		LoteArticulo lote = service.aprovisionarLote(serviceArticulo.traerArticulo(articuloId), cantidadRequerida);
 		return ResponseEntity.ok(lote);
 	}
-	
+
 	@DeleteMapping("/lotes/{id}")
 	public ResponseEntity<Boolean> eliminarLote(@PathVariable Long id) {
 		boolean eliminado = service.eliminarLote(id);

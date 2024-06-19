@@ -56,6 +56,6 @@ public interface IArticuloService {
 	 * @throws NoEncontradoException si el articulo a eliminar no existe
 	 */
 	public Articulo borrarArticulo(Articulo articulo);
-	
+
 	public List<ArticuloDiasDto> traerArticulosConMasDias(int dias);
 }

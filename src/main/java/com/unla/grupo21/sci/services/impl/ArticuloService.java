@@ -21,7 +21,7 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class ArticuloService implements IArticuloService {
-	
+
 	@Autowired
 	private IArticuloRepository articuloRepository;
 
@@ -74,20 +74,21 @@ public class ArticuloService implements IArticuloService {
 		articulo.setActivo(false);
 		return articuloRepository.save(articulo);
 	}
-	
+
 	@Override
-	public List<ArticuloDiasDto> traerArticulosConMasDias(int dias){
-		List<Articulo> listaArticulo= articuloRepository.findAll();
-		List<ArticuloDiasDto> listaArticuloMasViejos= new ArrayList<>();
+	public List<ArticuloDiasDto> traerArticulosConMasDias(int dias) {
+		List<Articulo> listaArticulo = articuloRepository.findAll();
+		List<ArticuloDiasDto> listaArticuloMasViejos = new ArrayList<>();
 
 		for (Articulo articulo : listaArticulo) {
-			//devuelve la cantidad de dias de vida del Articulo 
-			long diasArticulo= ChronoUnit.DAYS.between(articulo.getFechaCreacion(), LocalDateTime.now());
-			if(diasArticulo >= dias) {
-				listaArticuloMasViejos.add(ArticuloDiasDto.builder().nombreArticulo(articulo.getDescripcion()).dias(diasArticulo).build());
+			// devuelve la cantidad de dias de vida del Articulo
+			long diasArticulo = ChronoUnit.DAYS.between(articulo.getFechaCreacion(), LocalDateTime.now());
+			if (diasArticulo >= dias) {
+				listaArticuloMasViejos.add(
+						ArticuloDiasDto.builder().nombreArticulo(articulo.getDescripcion()).dias(diasArticulo).build());
 			}
 		}
-		
+
 		return listaArticuloMasViejos;
 	}
 

@@ -38,7 +38,7 @@ public class UsuarioController {
 		Usuario usuario = usuarioService.traerUsuario(id);
 		return ResponseEntity.ok(usuario);
 	}
-	
+
 	@GetMapping("/usuarios/usuario")
 	public ResponseEntity<Usuario> traerUsuario(@RequestParam String usuario) {
 		Usuario usuarioDb = usuarioService.traerUsuario(usuario);
@@ -50,16 +50,16 @@ public class UsuarioController {
 		Usuario usuario = usuarioService.registrarUsuario(dto, false);
 		return ResponseEntity.ok(usuario);
 	}
-	
+
 	@PostMapping("/usuarios/admin")
 	public ResponseEntity<Usuario> registrarAdministrador(@Valid @RequestBody UsuarioDto dto) {
 		Usuario usuario = usuarioService.registrarUsuario(dto, true);
 		return ResponseEntity.ok(usuario);
 	}
-	
+
 	@DeleteMapping("/usuarios/{idUsuario}")
-	public ResponseEntity<Usuario> eliminarUsuario(@PathVariable Long idUsuario){
+	public ResponseEntity<Usuario> eliminarUsuario(@PathVariable Long idUsuario) {
 		return ResponseEntity.ok(usuarioService.eliminarUsuario(idUsuario));
 	}
-	
+
 }

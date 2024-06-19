@@ -9,6 +9,6 @@ import lombok.Data;
 @Builder
 public class ArticuloCantidadDto {
 	private Articulo articulo;
-	
+
 	private Long cantidad;
 }

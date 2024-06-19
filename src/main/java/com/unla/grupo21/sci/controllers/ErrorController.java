@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestControllerAdvice
 public class ErrorController extends ResponseEntityExceptionHandler {
-	
+
 	@ExceptionHandler(AuthenticationCredentialsNotFoundException.class)
 	public ResponseEntity<ErrorDetailsDto> handleException(AuthenticationCredentialsNotFoundException e) {
 		log.error(e.getMessage());
@@ -28,7 +28,7 @@ public class ErrorController extends ResponseEntityExceptionHandler {
 		ErrorDetailsDto dto = ErrorDetailsDto.builder().date(LocalDateTime.now()).details(mensaje).build();
 		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(dto);
 	}
-	
+
 	@ExceptionHandler(AuthenticationException.class)
 	public ResponseEntity<ErrorDetailsDto> handleException(AuthenticationException e) {
 		log.error(e.getMessage());
