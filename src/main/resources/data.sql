@@ -57,6 +57,20 @@ INSERT INTO `tpc-oo2`.`articulos` (`id_articulo`, `activo`, `costo`, `descripcio
 SELECT '6', 1, '55.50', 'Redragon Fizz Pro K631', '2024-06-14 15:31:53.962542', '2024-06-14 15:31:53.962542', '70.00', false
 WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`articulos` WHERE `id_articulo` = '6');
 
+INSERT INTO `tpc-oo2`.`articulos` (`id_articulo`, `activo`, `costo`, `descripcion`, `fecha_actualizacion`, `fecha_creacion`, `precio_venta`, `esta_en_un_lote`)
+SELECT '7', 0, '3500.50', 'Smart TV Led 50 UHD Samsung', '2024-06-14 15:31:53.962542', '2024-06-14 15:31:53.962542', '3800.00', false
+WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`articulos` WHERE `id_articulo` = '7');
+
+INSERT INTO `tpc-oo2`.`articulos` (`id_articulo`, `activo`, `costo`, `descripcion`, `fecha_actualizacion`, `fecha_creacion`, `precio_venta`, `esta_en_un_lote`)
+SELECT '8', 0, '700.50', 'Auriculares Logitech G733 inalámbricos RGB', '2024-06-14 15:31:53.962542', '2024-06-14 15:31:53.962542', '1800.00', false
+WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`articulos` WHERE `id_articulo` = '8');
+
+INSERT INTO `tpc-oo2`.`articulos` (`id_articulo`, `activo`, `costo`, `descripcion`, `fecha_actualizacion`, `fecha_creacion`, `precio_venta`, `esta_en_un_lote`)
+SELECT '9', 0, '3000.50', 'iPad Apple 10th generation 2022', '2024-06-14 15:31:53.962542', '2024-06-14 15:31:53.962542', '4200.00', false
+WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`articulos` WHERE `id_articulo` = '9');
+
+
+
 -- INSERTs de lote_articulos
 
 INSERT INTO `tpc-oo2`.`lote_articulos` (`id_lote`, `cantidad`, `fecha_actualizacion`, `fecha_creacion`, `fecha_recepcion`, `precio_compra`, `proveedor`, `articulo_id`)
@@ -91,6 +105,18 @@ WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`items_venta` WHERE `id_item` = '3');
 INSERT INTO `tpc-oo2`.`ventas` (`id_venta`, `fecha_venta`, `precio_final`, `usuario_id_usuario`)
 SELECT '1', '2024-01-01', '20000.00', '2'
 WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`ventas` WHERE `id_venta` = '1');
+
+INSERT INTO `tpc-oo2`.`ventas` (`id_venta`, `fecha_venta`, `precio_final`, `usuario_id_usuario`)
+SELECT '2', '2024-02-01', '50000.00', '1'
+WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`ventas` WHERE `id_venta` = '2');
+
+INSERT INTO `tpc-oo2`.`ventas` (`id_venta`, `fecha_venta`, `precio_final`, `usuario_id_usuario`)
+SELECT '3', '2024-03-01', '15500.00', '3'
+WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`ventas` WHERE `id_venta` = '3');
+
+INSERT INTO `tpc-oo2`.`ventas` (`id_venta`, `fecha_venta`, `precio_final`, `usuario_id_usuario`)
+SELECT '4', '2024-04-01', '66000.00', '4'
+WHERE NOT EXISTS (SELECT 1 FROM `tpc-oo2`.`ventas` WHERE `id_venta` = '4');
 
 
 -- INSERTs de venta_item
