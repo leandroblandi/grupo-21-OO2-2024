@@ -33,6 +33,23 @@ CREATE SCHEMA `tpc-oo2`;
 ```
 De esa forma, se ejecutará el archivo `data.sql` al levantar el proyecto, eso incluirá algunos registros iniciales para poder utilizar la aplicación sin problemas.
 
+#### 1.2 Configuración de variables de entorno
+
+Para poder levantar correctamente la base de datos, deberás configurar ciertas variables de entorno. Para eso, sigue los siguientes pasos:
+Con el IDE abierto, seleccionas la pestaña “Run”
+Luego, “Run Configurations”
+
+#### 1.3 Sobre la solapa “Environments” haz lo siguiente:
+
+- Presiona el botón “Add”, ubicado al lado del recuadro de variables
+- Como nombre de variable de URL a la base de datos, agrega DB_URL:
+  - El valor será la ruta a la base de datos recién creada, normalmente con el valor de la imagen
+- Como nombre de variable de usuario, agrega DB_USERNAME:
+  - El valor será tu nombre de usuario configurado en MySQL
+- Como nombre de variable de contraseña, agrega “DB_PASSWORD”:
+  - El valor será tu contraseña para acceder a MySQL
+- Una vez agregadas estas tres variables, presiona el botón “Apply”, ubicado en la esquina inferior derecha.
+
 ### 2. Levantando el servidor por primera vez
 El servidor se iniciará en el puerto `8080`, por lo cual, asegúrate de tener libre ese puerto, o que no haya otro servidor Tomcat corriendo en el mismo puerto.
 Para iniciar el servidor, puedes hacer click derecho sobre el proyecto en el Package Explorer, y seleccionar la opción:
