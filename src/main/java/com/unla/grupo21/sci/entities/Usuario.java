@@ -1,16 +1,24 @@
 package com.unla.grupo21.sci.entities;
 
-import com.unla.grupo21.sci.enums.Rol;
+import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.validator.constraints.Length;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,28 +31,41 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idUsuario;
 
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
+	@Length(min = 2, max = 64)
 	private String usuario;
 
+	@JsonIgnore
 	@Column(nullable = false)
+	@Length(min = 4, max = 256)
 	private String clave;
 
 	@Column(nullable = false)
+	@Length(min = 2, max = 128)
 	private String nombre;
 
 	@Column(nullable = false)
+	@Length(min = 2, max = 128)
 	private String apellido;
 
 	@Column(nullable = false, unique = true)
+	@Min(0)
 	private int dni;
 
-	@Column(nullable = false)
-	@Enumerated(EnumType.STRING)
-	private Rol rol;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST })
+	@JsonManagedReference
+	private UsuarioRol rol;
 
+	@Column(nullable = false)
+	private boolean activo;
+
+	@CreationTimestamp
+	private LocalDateTime fechaCreacion;
+
+	@UpdateTimestamp
+	private LocalDateTime fechaActualizacion;
 }

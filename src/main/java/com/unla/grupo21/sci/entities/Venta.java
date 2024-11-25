@@ -1,7 +1,11 @@
 package com.unla.grupo21.sci.entities;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -25,7 +29,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "ventas")
 public class Venta {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idVenta;
@@ -33,12 +36,18 @@ public class Venta {
 	@Column(nullable = false)
 	private LocalDate fechaVenta;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-	private List<LoteArticulo> loteArticulos;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	private List<ItemVenta> items;
 
 	@Column(nullable = false)
 	private double precioFinal;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	private Usuario usuario;
+
+	@CreationTimestamp
+	private LocalDateTime fechaCreacion;
+
+	@UpdateTimestamp
+	private LocalDateTime fechaActualizacion;
 }
